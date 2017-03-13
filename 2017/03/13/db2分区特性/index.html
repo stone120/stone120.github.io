@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="项目管理,夕会," />
+  <meta name="keywords" content="db2,数据库," />
 
 
 
@@ -87,22 +87,26 @@
 
 
 
-<meta name="description" content="近期项目管理过程中使用了 夕会 ，总结如下：
-适用场景
-项目团队成员较多，各自分工不同，互相间的工作有依赖或者有借鉴之处项目实施沟通交流效率不高，问题解决效率不高项目处于联调等需要紧密沟通，快速响应阶段解决成员工作效率低，质量低，降低项目进度风险">
+<meta name="description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
+架构上可以分为：共享内存， 共享存储， 无共享。
+DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="项目管理之夕会">
-<meta property="og:url" content="http://www.sillystone.info/2017/03/09/项目管理之夕会/index.html">
+<meta property="og:title" content="db2分区特性">
+<meta property="og:url" content="http://www.sillystone.info/2017/03/13/db2分区特性/index.html">
 <meta property="og:site_name" content="三只鱼">
-<meta property="og:description" content="近期项目管理过程中使用了 夕会 ，总结如下：
-适用场景
-项目团队成员较多，各自分工不同，互相间的工作有依赖或者有借鉴之处项目实施沟通交流效率不高，问题解决效率不高项目处于联调等需要紧密沟通，快速响应阶段解决成员工作效率低，质量低，降低项目进度风险">
-<meta property="og:updated_time" content="2017-03-09T14:27:46.052Z">
+<meta property="og:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
+架构上可以分为：共享内存， 共享存储， 无共享。
+DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
+<meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
+<meta property="og:image" content="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml">
+<meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html">
+<meta property="og:updated_time" content="2017-03-13T08:57:33.918Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="项目管理之夕会">
-<meta name="twitter:description" content="近期项目管理过程中使用了 夕会 ，总结如下：
-适用场景
-项目团队成员较多，各自分工不同，互相间的工作有依赖或者有借鉴之处项目实施沟通交流效率不高，问题解决效率不高项目处于联调等需要紧密沟通，快速响应阶段解决成员工作效率低，质量低，降低项目进度风险">
+<meta name="twitter:title" content="db2分区特性">
+<meta name="twitter:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
+架构上可以分为：共享内存， 共享存储， 无共享。
+DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
+<meta name="twitter:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
 
 
 
@@ -130,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://www.sillystone.info/2017/03/09/项目管理之夕会/"/>
+  <link rel="canonical" href="http://www.sillystone.info/2017/03/13/db2分区特性/"/>
 
 
 
 
 
-  <title> 项目管理之夕会 | 三只鱼 </title>
+  <title> db2分区特性 | 三只鱼 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -313,7 +317,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/09/项目管理之夕会/">
+    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/13/db2分区特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Stone">
@@ -334,7 +338,7 @@
             
             
               
-                项目管理之夕会
+                db2分区特性
               
             
           </h1>
@@ -349,8 +353,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-09T21:14:01+08:00">
-                2017-03-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-13T16:09:56+08:00">
+                2017-03-13
               </time>
             
 
@@ -372,8 +376,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/项目管理/" itemprop="url" rel="index">
-                    <span itemprop="name">项目管理</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -390,8 +394,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/09/项目管理之夕会/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/09/项目管理之夕会/" itemprop="commentCount"></span>
+                <a href="/2017/03/13/db2分区特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/13/db2分区特性/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -417,27 +421,146 @@
       
 
       
-        <p>近期项目管理过程中使用了 <em>夕会</em> ，总结如下：</p>
-<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><blockquote>
-<p>项目团队成员较多，各自分工不同，互相间的工作有依赖或者有借鉴之处<br>项目实施沟通交流效率不高，问题解决效率不高<br>项目处于联调等需要紧密沟通，快速响应阶段<br>解决成员工作效率低，质量低，降低项目进度风险</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和<br>数据运维几个方面。</p>
+<p>架构上可以分为：共享内存， 共享存储， 无共享。</p>
+<h2 id="DPF-数据分区"><a href="#DPF-数据分区" class="headerlink" title="DPF 数据分区"></a>DPF 数据分区</h2><p>Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立<br>的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点<br>有独立处理能力，节点间通过高速网路连接。</p>
+<p>扩展性好，可增加节点。一库拆分为多库的思路。<br>并行策略，节点之间，节点内分区并行，查询语句并行<br>DPF还根据负载动态分流，同时支持异步I/O和平行I/O</p>
+<h2 id="MDC"><a href="#MDC" class="headerlink" title="MDC"></a>MDC</h2><p><img src="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html" alt="IBM MDC 介绍"><br>MDC是在DB2 Version 8中引入的，通过它可以在物理上将在多维上具有类似值的行聚合在一起放在磁盘上。这种聚合能为常见分析性查询提供高效的I/O，提高检索数据的效率<br>一个块的大小等于表空间的扩展数据块（extent）大小，扩展数据块是磁盘上的一组连续页，所以将这些具有类似值的行在物理上是存放在连续的数据页上<br>在 MDC 表中，块映射（block map）会跟踪属于这个表的所有扩展数据块，并且指示哪些块或扩展数据块上包含数据以及哪些块或扩展数据块上没有包含数据。包含数据的块标记为“正在使用”(“IN USE”)。每当发生删除或转出时，相应的块条目不再标记为“正在使用”，而是被释放以供 MDC 表复用。但是表空间中的其他对象无法使用这些扩展数据块。<br>可以通过重组 MDC 表来从 MDC 表释放这些可用数据扩展数据块</p>
+<blockquote>
+<ul>
+<li>由于与基于记录的索引相比，由于块索引的大小是很小的，所以探测和扫描块索引要快</li>
+<li>块索引和相应的数据组织允许更精细的“数据库分区忽略”或者有选择性地进行表访问</li>
+<li>利用块索引的查询因为减小了索引大小、优化了对块的预取并且可以保证相应数据的集群而受益</li>
+<li>对于某些查询，可以减少锁定和谓词求值</li>
+<li>块索引用于日志记录和维护方面的开销很少，因为仅当将第一条记录添加至块或从块中除去最后一条记录时才需要更新它们<br>*转入的数据可以复用先前转出的数据留下的连续空间。</li>
+</ul>
 </blockquote>
-<a id="more"></a>
-<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><blockquote>
-<p>项目整体计划明确，成员的每日工作目标明确<br>项目管理成员持续跟踪项目进展，跟踪问题，收集反馈，更新问题解决进展<br>收集整理夕会要点</p>
+<p>对于 MDC，一个关键的决定是用哪些列作为 MDC 维。设计上的挑战是找到最佳的一组维和最佳的粒度，使得组织最大化，存储需求最小化。较好的选择是具有以下一部分或全部特征的列：</p>
+<blockquote>
+<p>用于范围、等于或 IN 列表谓词<br>用于转入、转出或其他大规模的行删除<br>被 GROUP BY 或 ORDER by 子句引用<br>外键列<br>星型数据库的事实表中 join 子句中的列<br>粗粒度，也就是说不同的值很少的列<br>典型的设计是用一个表示日期的列作为一个 MDC 维，再加上 0 到 3 个其他列作为其他维，例如 region 和 product_type。</p>
 </blockquote>
-<h2 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h2><blockquote>
-<p>参会人员准时参加<br>会议要点描述清晰准确<br>会议时间尽量短</p>
-</blockquote>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><blockquote>
-<p>项目经理（项目跟踪人）讲述跟踪问题的进展，明确问题的责任人和完成计划<br>与会人员可对跟踪问题的提意见/建议，但不展开讨论<br>与会人员补充：待跟进事项，会上明确责任人和反馈时间<br>与会人员向大家通知重要决策和决定</p>
-</blockquote>
-<h2 id="产出物：跟踪事项要点"><a href="#产出物：跟踪事项要点" class="headerlink" title="产出物：跟踪事项要点"></a>产出物：跟踪事项要点</h2><blockquote>
-<p>责任人<br>时间<br>职责<br>交付物</p>
-</blockquote>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><pre><code>夕会 是日计划的一部分，与之对应的有 晨会，晨会主要明确成员的当日工作目标
-日计划主要用于项目经理跟踪计划的完成度和完成质量，保证项目的关键任务及时完成
-夕会 主要用于日计划的总结，问题的跟踪，明确人员职责 
-</code></pre>
+<h2 id="TP表分区"><a href="#TP表分区" class="headerlink" title="TP表分区"></a>TP表分区</h2><p>TP是在DB2 9中引入的，与MDC类似，它也可以将具有近似值的行存储在一起。TP 不同于其他特性的优势在于为表添加或删除大量数据这个方面，即转入和转出。</p>
+<h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h3><table>
+<thead>
+<tr>
+<th>分区方式</th>
+<th>Create table语句</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DPF</td>
+<td>DISTRIBUTE BY HASH</td>
+</tr>
+<tr>
+<td>MDC</td>
+<td>ORGANIZE BY DIMENSION</td>
+</tr>
+<tr>
+<td>TP</td>
+<td>PARTITION BY RANGE</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设计特性"><a href="#设计特性" class="headerlink" title="设计特性"></a>设计特性</h3><table>
+<thead>
+<tr>
+<th>分区方式</th>
+<th>实现思路</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DPF</td>
+<td>将行均匀地分布在多个数据库分区上</td>
+<td>可伸缩性随着数据库的增长增加计算资源（也就是数据库分区）</td>
+</tr>
+<tr>
+<td>MDC</td>
+<td>将在多维上具有近似值的行放在表中相同的物理位置，即所谓的块</td>
+<td>查询性能 —— 组织数据的方式有利于获得更快的检索速度，对于由多个谓词指定范围的查询尤其有效</td>
+</tr>
+<tr>
+<td>TP</td>
+<td>将所有行放在同一个数据分区的一个指定范围的维中</td>
+<td>数据移动 —— 通过添加和删除整个数据分区，可以增加和删除大量数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="事实表特征"><a href="#事实表特征" class="headerlink" title="事实表特征"></a>事实表特征</h3><table>
+<thead>
+<tr>
+<th>分区方式</th>
+<th>适合</th>
+<th>事实</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DPF</td>
+<td>大型表 —— 大到无法仅依靠单独一组 CPU 和 I/O 通道来处理</td>
+<td>事实表是最大的数据库表。它们常常包含数亿行数据，有时候甚至包含数千亿行数据</td>
+</tr>
+<tr>
+<td>MDC</td>
+<td>结果集返回在多个维上具有近似值的行的查询</td>
+<td>事实表（以及通常所说的数据仓库）是为支持这种类型的查询而设计的</td>
+</tr>
+<tr>
+<td>TP</td>
+<td>这种类型的表：周期性地添加大量数据，然后在数据到期后又删除大量数据</td>
+<td>在事实表中，常常是每天都添加新数据。通常每月或每个季度删除过时的数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="经验法则总结"><a href="#经验法则总结" class="headerlink" title="经验法则总结"></a>经验法则总结</h3><table>
+<thead>
+<tr>
+<th>分区方式</th>
+<th>分区特性设计决定</th>
+<th>经验法则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DPF</td>
+<td>用作分布键的列</td>
+<td>首选是具有很多不同值的列</td>
+</tr>
+<tr>
+<td>MDC</td>
+<td>用作 MDC 维的列</td>
+<td>一种典型的设计是选择一个表示日期的列，再加上 0 到 3 个其他列</td>
+</tr>
+<tr>
+<td>TP</td>
+<td>用作表分区键的列和分区的数量</td>
+<td>选择一个基于时间的列。定义与每次转出的数据量相符的分区</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DB2-amp-Oracle"><a href="#DB2-amp-Oracle" class="headerlink" title="DB2 &amp; Oracle"></a>DB2 &amp; Oracle</h3><table>
+<thead>
+<tr>
+<th>Oracle分区</th>
+<th>DB2分区</th>
+<th>Oracle 10g语法</th>
+<th>DB2 V9语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区间分区（Range Partitioning）</td>
+<td>表分区（Table Partitioning）</td>
+<td>PARTITION BY</td>
+</tr>
+</tbody>
+</table>
+<p>RANGE|PARTITION BY RANGE|<br>|哈希分区（Hash Partitioning）|数据库分区（Database Partitioning）|PARTITION BY<br>HASH |DISTRIBUTE BY HASH|<br>|列表分区（List Partitioning）|带生成列表分区（Table Partitioning With Generated Column）|PARTITION BY LIST|PARTITION BY RANGE|<br>|不支持 |多维集群（Multidimensional clustering）|无|ORGANIZE BY DIMENSION|<br>DB2的数据库分区特性采用Share-nothing架构，这种架构允许多个数据库分区在一起并行工作来处理工作负载。在Oracle中，使用Share-disk架构</p>
+<h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">　<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> partition_table</div><div class="line"></div><div class="line">　　(partition_date <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"></div><div class="line">　　partition_data <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"></div><div class="line">　　)</div><div class="line"></div><div class="line">　　<span class="keyword">IN</span> tbsp_parts</div><div class="line"></div><div class="line">　　<span class="keyword">DISTRIBUTE</span> <span class="keyword">BY</span> <span class="keyword">HASH</span> (partition_date);</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><img src="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml" alt="IBM DB2关键特性解析：DB2分区特性"><br><img src="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html" alt="IBM官网： 表分区和多维集群表"></p>
+
       
     </div>
 
@@ -476,9 +599,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/项目管理/" rel="tag"># 项目管理</a>
+            <a href="/tags/db2/" rel="tag"># db2</a>
           
-            <a href="/tags/夕会/" rel="tag"># 夕会</a>
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
         </div>
       
@@ -491,8 +614,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/吹风/" rel="next" title="吹风">
-                <i class="fa fa-chevron-left"></i> 吹风
+              <a href="/2017/03/12/思维/" rel="next" title="思维">
+                <i class="fa fa-chevron-left"></i> 思维
               </a>
             
           </div>
@@ -500,10 +623,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/11/浅谈银行系统-渠道类系统/" rel="prev" title="浅谈银行系统-渠道类系统">
-                浅谈银行系统-渠道类系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -529,8 +648,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/09/项目管理之夕会/"
-           data-title="项目管理之夕会" data-url="http://www.sillystone.info/2017/03/09/项目管理之夕会/">
+      <div class="ds-thread" data-thread-key="2017/03/13/db2分区特性/"
+           data-title="db2分区特性" data-url="http://www.sillystone.info/2017/03/13/db2分区特性/">
       </div>
     
   </div>
@@ -643,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#适用场景"><span class="nav-number">1.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前提"><span class="nav-number">2.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#要求"><span class="nav-number">3.</span> <span class="nav-text">要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#步骤"><span class="nav-number">4.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产出物：跟踪事项要点"><span class="nav-number">5.</span> <span class="nav-text">产出物：跟踪事项要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">6.</span> <span class="nav-text">补充</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DPF-数据分区"><span class="nav-number">2.</span> <span class="nav-text">DPF 数据分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MDC"><span class="nav-number">3.</span> <span class="nav-text">MDC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TP表分区"><span class="nav-number">4.</span> <span class="nav-text">TP表分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">5.</span> <span class="nav-text">比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL"><span class="nav-number">5.1.</span> <span class="nav-text">DDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计特性"><span class="nav-number">5.2.</span> <span class="nav-text">设计特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事实表特征"><span class="nav-number">5.3.</span> <span class="nav-text">事实表特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经验法则总结"><span class="nav-number">5.4.</span> <span class="nav-text">经验法则总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2-amp-Oracle"><span class="nav-number">5.5.</span> <span class="nav-text">DB2 & Oracle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">6.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
