@@ -95,15 +95,11 @@
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
 架构上可以分为：共享内存， 共享存储， 无共享。">
-<meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
-<meta property="og:image" content="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml">
-<meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html">
-<meta property="og:updated_time" content="2017-03-13T09:08:06.963Z">
+<meta property="og:updated_time" content="2017-03-13T09:12:01.237Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2分区特性">
 <meta name="twitter:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
 架构上可以分为：共享内存， 共享存储， 无共享。">
-<meta name="twitter:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
 
 
 
@@ -422,14 +418,15 @@
 <p>架构上可以分为：共享内存， 共享存储， 无共享。<br><a id="more"></a></p>
 <h2 id="DPF-数据分区"><a href="#DPF-数据分区" class="headerlink" title="DPF 数据分区"></a>DPF 数据分区</h2><p>Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立<br>的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点<br>有独立处理能力，节点间通过高速网路连接。</p>
 <p>扩展性好，可增加节点。一库拆分为多库的思路。<br>并行策略，节点之间，节点内分区并行，查询语句并行<br>DPF还根据负载动态分流，同时支持异步I/O和平行I/O</p>
-<h2 id="MDC"><a href="#MDC" class="headerlink" title="MDC"></a>MDC</h2><p><img src="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html" alt="IBM MDC 介绍"><br>MDC是在DB2 Version 8中引入的，通过它可以在物理上将在多维上具有类似值的行聚合在一起放在磁盘上。这种聚合能为常见分析性查询提供高效的I/O，提高检索数据的效率<br>一个块的大小等于表空间的扩展数据块（extent）大小，扩展数据块是磁盘上的一组连续页，所以将这些具有类似值的行在物理上是存放在连续的数据页上<br>在 MDC 表中，块映射（block map）会跟踪属于这个表的所有扩展数据块，并且指示哪些块或扩展数据块上包含数据以及哪些块或扩展数据块上没有包含数据。包含数据的块标记为“正在使用”(“IN USE”)。每当发生删除或转出时，相应的块条目不再标记为“正在使用”，而是被释放以供 MDC 表复用。但是表空间中的其他对象无法使用这些扩展数据块。<br>可以通过重组 MDC 表来从 MDC 表释放这些可用数据扩展数据块</p>
+<h2 id="MDC"><a href="#MDC" class="headerlink" title="MDC"></a>MDC</h2><p><a href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html" target="_blank" rel="external">IBM MDC 介绍</a><br>MDC是在DB2 Version 8中引入的，通过它可以在物理上将在多维上具有类似值的行聚合在一起放在磁盘上。这种聚合能为常见分析性查询提供高效的I/O，提高检索数据的效率<br>一个块的大小等于表空间的扩展数据块（extent）大小，扩展数据块是磁盘上的一组连续页，所以将这些具有类似值的行在物理上是存放在连续的数据页上<br>在 MDC 表中，块映射（block map）会跟踪属于这个表的所有扩展数据块，并且指示哪些块或扩展数据块上包含数据以及哪些块或扩展数据块上没有包含数据。包含数据的块标记为“正在使用”(“IN USE”)。每当发生删除或转出时，相应的块条目不再标记为“正在使用”，而是被释放以供 MDC 表复用。但是表空间中的其他对象无法使用这些扩展数据块。<br>可以通过重组 MDC 表来从 MDC 表释放这些可用数据扩展数据块</p>
 <blockquote>
 <ul>
 <li>由于与基于记录的索引相比，由于块索引的大小是很小的，所以探测和扫描块索引要快</li>
 <li>块索引和相应的数据组织允许更精细的“数据库分区忽略”或者有选择性地进行表访问</li>
 <li>利用块索引的查询因为减小了索引大小、优化了对块的预取并且可以保证相应数据的集群而受益</li>
 <li>对于某些查询，可以减少锁定和谓词求值</li>
-<li>块索引用于日志记录和维护方面的开销很少，因为仅当将第一条记录添加至块或从块中除去最后一条记录时才需要更新它们<br>*转入的数据可以复用先前转出的数据留下的连续空间。</li>
+<li>块索引用于日志记录和维护方面的开销很少，因为仅当将第一条记录添加至块或从块中除去最后一条记录时才需要更新它们</li>
+<li>转入的数据可以复用先前转出的数据留下的连续空间。</li>
 </ul>
 </blockquote>
 <p>对于 MDC，一个关键的决定是用哪些列作为 MDC 维。设计上的挑战是找到最佳的一组维和最佳的粒度，使得组织最大化，存储需求最小化。较好的选择是具有以下一部分或全部特征的列：</p>
@@ -550,13 +547,19 @@
 <tr>
 <td>区间分区（Range Partitioning）</td>
 <td>表分区（Table Partitioning）</td>
+<td>PARTITION BY RANGE</td>
+<td>PARTITION BY RANGE</td>
+</tr>
+<tr>
+<td>哈希分区（Hash Partitioning）</td>
+<td>数据库分区（Database Partitioning）</td>
 <td>PARTITION BY</td>
 </tr>
 </tbody>
 </table>
-<p>RANGE|PARTITION BY RANGE|<br>|哈希分区（Hash Partitioning）|数据库分区（Database Partitioning）|PARTITION BY<br>HASH |DISTRIBUTE BY HASH|<br>|列表分区（List Partitioning）|带生成列表分区（Table Partitioning With Generated Column）|PARTITION BY LIST|PARTITION BY RANGE|<br>|不支持 |多维集群（Multidimensional clustering）|无|ORGANIZE BY DIMENSION|<br>DB2的数据库分区特性采用Share-nothing架构，这种架构允许多个数据库分区在一起并行工作来处理工作负载。在Oracle中，使用Share-disk架构</p>
+<p>HASH |DISTRIBUTE BY HASH|<br>|列表分区（List Partitioning）|带生成列表分区（Table Partitioning With Generated Column）|PARTITION BY LIST|PARTITION BY RANGE|<br>|不支持 |多维集群（Multidimensional clustering）|无|ORGANIZE BY DIMENSION|<br>DB2的数据库分区特性采用Share-nothing架构，这种架构允许多个数据库分区在一起并行工作来处理工作负载。在Oracle中，使用Share-disk架构</p>
 <h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">　<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> partition_table</div><div class="line"></div><div class="line">　　(partition_date <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"></div><div class="line">　　partition_data <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"></div><div class="line">　　)</div><div class="line"></div><div class="line">　　<span class="keyword">IN</span> tbsp_parts</div><div class="line"></div><div class="line">　　<span class="keyword">DISTRIBUTE</span> <span class="keyword">BY</span> <span class="keyword">HASH</span> (partition_date);</div></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><img src="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml" alt="IBM DB2关键特性解析：DB2分区特性"><br><img src="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html" alt="IBM官网： 表分区和多维集群表"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml" target="_blank" rel="external">IBM DB2关键特性解析：DB2分区特性</a><br><a href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html" target="_blank" rel="external">IBM官网： 表分区和多维集群表</a></p>
 
       
     </div>
