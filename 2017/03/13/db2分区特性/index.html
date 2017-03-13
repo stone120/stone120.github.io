@@ -88,24 +88,21 @@
 
 
 <meta name="description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
-架构上可以分为：共享内存， 共享存储， 无共享。
-DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
+架构上可以分为：共享内存， 共享存储， 无共享。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="db2分区特性">
 <meta property="og:url" content="http://www.sillystone.info/2017/03/13/db2分区特性/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
-架构上可以分为：共享内存， 共享存储， 无共享。
-DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
+架构上可以分为：共享内存， 共享存储， 无共享。">
 <meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
 <meta property="og:image" content="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml">
 <meta property="og:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html">
-<meta property="og:updated_time" content="2017-03-13T08:57:33.918Z">
+<meta property="og:updated_time" content="2017-03-13T09:08:06.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2分区特性">
 <meta name="twitter:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
-架构上可以分为：共享内存， 共享存储， 无共享。
-DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点有独立处理能力，">
+架构上可以分为：共享内存， 共享存储， 无共享。">
 <meta name="twitter:image" content="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html">
 
 
@@ -422,7 +419,7 @@ DPF 数据分区Data Partitioning feature， 采用share-nothing体系结构。�
 
       
         <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和<br>数据运维几个方面。</p>
-<p>架构上可以分为：共享内存， 共享存储， 无共享。</p>
+<p>架构上可以分为：共享内存， 共享存储， 无共享。<br><a id="more"></a></p>
 <h2 id="DPF-数据分区"><a href="#DPF-数据分区" class="headerlink" title="DPF 数据分区"></a>DPF 数据分区</h2><p>Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立<br>的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点<br>有独立处理能力，节点间通过高速网路连接。</p>
 <p>扩展性好，可增加节点。一库拆分为多库的思路。<br>并行策略，节点之间，节点内分区并行，查询语句并行<br>DPF还根据负载动态分流，同时支持异步I/O和平行I/O</p>
 <h2 id="MDC"><a href="#MDC" class="headerlink" title="MDC"></a>MDC</h2><p><img src="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html" alt="IBM MDC 介绍"><br>MDC是在DB2 Version 8中引入的，通过它可以在物理上将在多维上具有类似值的行聚合在一起放在磁盘上。这种聚合能为常见分析性查询提供高效的I/O，提高检索数据的效率<br>一个块的大小等于表空间的扩展数据块（extent）大小，扩展数据块是磁盘上的一组连续页，所以将这些具有类似值的行在物理上是存放在连续的数据页上<br>在 MDC 表中，块映射（block map）会跟踪属于这个表的所有扩展数据块，并且指示哪些块或扩展数据块上包含数据以及哪些块或扩展数据块上没有包含数据。包含数据的块标记为“正在使用”(“IN USE”)。每当发生删除或转出时，相应的块条目不再标记为“正在使用”，而是被释放以供 MDC 表复用。但是表空间中的其他对象无法使用这些扩展数据块。<br>可以通过重组 MDC 表来从 MDC 表释放这些可用数据扩展数据块</p>
