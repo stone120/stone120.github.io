@@ -95,11 +95,13 @@
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
 架构上可以分为：共享内存， 共享存储， 无共享。">
-<meta property="og:updated_time" content="2017-03-14T00:45:32.309Z">
+<meta property="og:image" content="http://www.sillystone.info/images/user/00055377.gif">
+<meta property="og:updated_time" content="2017-03-14T13:59:12.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2分区特性">
 <meta name="twitter:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
 架构上可以分为：共享内存， 共享存储， 无共享。">
+<meta name="twitter:image" content="http://www.sillystone.info/images/user/00055377.gif">
 
 
 
@@ -419,7 +421,7 @@
 <h2 id="DPF-数据分区"><a href="#DPF-数据分区" class="headerlink" title="DPF 数据分区"></a>DPF 数据分区</h2><p>Data Partitioning feature， 采用share-nothing体系结构。数据库在非共享环境下分为独立<br>的分区，每个分区有独立的硬件资源，数据，索引和日志，每个数据分区可以称为节点；每个节点<br>有独立处理能力，节点间通过高速网路连接。</p>
 <p>扩展性好，可增加节点。一库拆分为多库的思路。<br>并行策略，节点之间，节点内分区并行，查询语句并行<br>DPF还根据负载动态分流，同时支持异步I/O和平行I/O</p>
 <h2 id="MDC"><a href="#MDC" class="headerlink" title="MDC"></a>MDC</h2><p><a href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0022242.html" target="_blank" rel="external">IBM MDC 介绍</a><br>MDC是在DB2 Version 8中引入的，通过它可以在物理上将在多维上具有类似值的行聚合在一起放在磁盘上。这种聚合能为常见分析性查询提供高效的I/O，提高检索数据的效率<br>一个块的大小等于表空间的扩展数据块（extent）大小，扩展数据块是磁盘上的一组连续页，所以将这些具有类似值的行在物理上是存放在连续的数据页上<br>在 MDC 表中，块映射（block map）会跟踪属于这个表的所有扩展数据块，并且指示哪些块或扩展数据块上包含数据以及哪些块或扩展数据块上没有包含数据。包含数据的块标记为“正在使用”(“IN USE”)。每当发生删除或转出时，相应的块条目不再标记为“正在使用”，而是被释放以供 MDC 表复用。但是表空间中的其他对象无法使用这些扩展数据块。<br>可以通过重组 MDC 表来从 MDC 表释放这些可用数据扩展数据块</p>
-<blockquote>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><blockquote>
 <ul>
 <li>由于与基于记录的索引相比，由于块索引的大小是很小的，所以探测和扫描块索引要快</li>
 <li>块索引和相应的数据组织允许更精细的“数据库分区忽略”或者有选择性地进行表访问</li>
@@ -429,11 +431,15 @@
 <li>转入的数据可以复用先前转出的数据留下的连续空间。</li>
 </ul>
 </blockquote>
-<p>对于 MDC，一个关键的决定是用哪些列作为 MDC 维。设计上的挑战是找到最佳的一组维和最佳的粒度，使得组织最大化，存储需求最小化。较好的选择是具有以下一部分或全部特征的列：</p>
-<blockquote>
-<p>用于范围、等于或 IN 列表谓词<br>用于转入、转出或其他大规模的行删除<br>被 GROUP BY 或 ORDER by 子句引用<br>外键列<br>星型数据库的事实表中 join 子句中的列<br>粗粒度，也就是说不同的值很少的列<br>典型的设计是用一个表示日期的列作为一个 MDC 维，再加上 0 到 3 个其他列作为其他维，例如 region 和 product_type。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>数据量大，经常按某一条件删除或者增加数据，经常使用相异值小的列（这样的列不适合常规索引）进行数据范围筛选</p>
+<h3 id="维度筛选"><a href="#维度筛选" class="headerlink" title="维度筛选"></a>维度筛选</h3><blockquote>
+<p>用于范围、等于或 IN 列表谓词<br>用于转入、转出或其他大规模的行删除<br>被 GROUP BY 或 ORDER by 子句引用<br>外键列<br>星型数据库的事实表中 join 子句中的列<br>粗粒度，也就是说不同的值很少的列<br>典型的设计是用一个表示日期的列作为一个 MDC 维，再加上 0 到 3 个其他列作为其他维，例如 region 和 product_type。绝对不能使用主键或唯一索引列做维度</p>
+<h3 id="索引设计"><a href="#索引设计" class="headerlink" title="索引设计"></a>索引设计</h3><p>MDC表支持创建常规索引，对于一个n维的MDC表自动会创建n+1个索引，即：每个维度一个索引，加上所有维度的组合索引</p>
 </blockquote>
-<h2 id="TP表分区"><a href="#TP表分区" class="headerlink" title="TP表分区"></a>TP表分区</h2><p>TP是在DB2 9中引入的，与MDC类似，它也可以将具有近似值的行存储在一起。TP 不同于其他特性的优势在于为表添加或删除大量数据这个方面，即转入和转出。</p>
+<h2 id="TP表分区"><a href="#TP表分区" class="headerlink" title="TP表分区"></a>TP表分区</h2><p>TP是在DB2 9中引入的，与MDC类似，它也可以将具有近似值的行存储在一起。TP 不同于其他特性的优势在于为表添加或删除大量数据这个方面，即转入和转出。<br>分区表的索引全部建成分区索引，要求尽量不要建立主键和唯一索引</p>
+<p>分区表的索引默认是分区索引, 如下所示：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> A (<span class="keyword">columns</span>) </div><div class="line">      <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="keyword">column</span> expression)</div><div class="line">      (<span class="keyword">PARTITION</span> PART0 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span> <span class="keyword">IN</span> ts1 <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts2,</div><div class="line">       <span class="keyword">PARTITION</span> PART1 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span> <span class="keyword">IN</span> ts3 <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts4, </div><div class="line">       <span class="keyword">PARTITION</span> PART2 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span> <span class="keyword">IN</span> ts3,<span class="keyword">INDEX</span> <span class="keyword">IN</span> ts5)</div><div class="line">     </div><div class="line">   <span class="keyword">CREATE</span> <span class="keyword">INDEX</span> x1 <span class="keyword">ON</span> A (...); </div><div class="line">   <span class="keyword">CREATE</span> <span class="keyword">INDEX</span> x2 <span class="keyword">ON</span> A (...);</div></pre></td></tr></table></figure></p>
+<p>分区表建立非分区索引，下例x1; 存储空间参见示例图2<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t1 (<span class="keyword">columns</span>) <span class="keyword">in</span> ts1 <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts2  <span class="number">1</span> </div><div class="line">   <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span> (<span class="keyword">column</span> expression)</div><div class="line">   (<span class="keyword">PARTITION</span> PART0 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span>  <span class="keyword">IN</span> ts3,  <span class="number">2</span> </div><div class="line">    <span class="keyword">PARTITION</span> PART1 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span>  <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts5,</div><div class="line">    <span class="keyword">PARTITION</span> PART2 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span>  <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts4,</div><div class="line">    <span class="keyword">PARTITION</span> PART3 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span>  <span class="keyword">INDEX</span> <span class="keyword">IN</span> ts4,</div><div class="line">    <span class="keyword">PARTITION</span> PART4 <span class="keyword">STARTING</span> <span class="keyword">FROM</span> <span class="keyword">constant</span> ENDING <span class="keyword">constant</span>)</div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> x1 <span class="keyword">ON</span> t1 (...) <span class="keyword">NOT</span> PARTITIONED; </div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> x2 <span class="keyword">ON</span> t1 (...) PARTITIONED;</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> x3 <span class="keyword">ON</span> t1 (...) PARTITIONED;</div></pre></td></tr></table></figure></p>
+<p>空间存储示例如下：<br><img src="/images/user/00055377.gif" alt="示例图2"></p>
 <h2 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h2><h3 id="DDL"><a href="#DDL" class="headerlink" title="DDL"></a>DDL</h3><table>
 <thead>
 <tr>
@@ -637,6 +643,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/03/14/db2数据库设计要点/" rel="prev" title="db2数据库物理设计要点">
+                db2数据库物理设计要点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -711,7 +721,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -775,7 +785,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DPF-数据分区"><span class="nav-number">2.</span> <span class="nav-text">DPF 数据分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MDC"><span class="nav-number">3.</span> <span class="nav-text">MDC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TP表分区"><span class="nav-number">4.</span> <span class="nav-text">TP表分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">5.</span> <span class="nav-text">比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL"><span class="nav-number">5.1.</span> <span class="nav-text">DDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计特性"><span class="nav-number">5.2.</span> <span class="nav-text">设计特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事实表特征"><span class="nav-number">5.3.</span> <span class="nav-text">事实表特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经验法则总结"><span class="nav-number">5.4.</span> <span class="nav-text">经验法则总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2-amp-Oracle"><span class="nav-number">5.5.</span> <span class="nav-text">DB2 & Oracle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">6.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DPF-数据分区"><span class="nav-number">2.</span> <span class="nav-text">DPF 数据分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MDC"><span class="nav-number">3.</span> <span class="nav-text">MDC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-number">3.1.</span> <span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-number">3.2.</span> <span class="nav-text">适用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维度筛选"><span class="nav-number">3.3.</span> <span class="nav-text">维度筛选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引设计"><span class="nav-number">3.4.</span> <span class="nav-text">索引设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TP表分区"><span class="nav-number">4.</span> <span class="nav-text">TP表分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#比较"><span class="nav-number">5.</span> <span class="nav-text">比较</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DDL"><span class="nav-number">5.1.</span> <span class="nav-text">DDL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计特性"><span class="nav-number">5.2.</span> <span class="nav-text">设计特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事实表特征"><span class="nav-number">5.3.</span> <span class="nav-text">事实表特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经验法则总结"><span class="nav-number">5.4.</span> <span class="nav-text">经验法则总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DB2-amp-Oracle"><span class="nav-number">5.5.</span> <span class="nav-text">DB2 & Oracle</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码示例"><span class="nav-number">6.</span> <span class="nav-text">代码示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">7.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>

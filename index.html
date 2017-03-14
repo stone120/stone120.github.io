@@ -308,6 +308,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/14/db2数据库设计要点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stone">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user/chongshi3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三只鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/14/db2数据库设计要点/" itemprop="url">
+                  db2数据库物理设计要点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-14T16:59:52+08:00">
+                2017-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/03/14/db2数据库设计要点/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/14/db2数据库设计要点/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p>单分区SMP<br>集群数据库Purescale<br>多分区MPP：数据量大于2TB</p>
+<h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><h3 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h3><blockquote>
+<p>库名：XXXXDB<br>数据文件存储目录： 独立挂载，便于运维和扩展<br>数据库主目录：独立挂载，空间需求：小于10g<br>活动日志目录：独立挂载，容量设计（压测大小的1.5倍）<br>归档日志目录：独立挂载，容量设计（至少3天日志量，循环日志不需要配置）<br>代码页： UTF-8（1208）<br>RESTRICTIVE：如果未声明 则默认 restrictive 为no，默认赋值PUBLIC权限（下列数据库特权被自动授予 PUBLIC：对系统目录视图的 CREATETAB、BINDADD、CONNECT、IMPLICIT_SCHEMA 和 SELECT）。但是，如果有 RESTRICTIVE 选项，那么不会自动对 PUBLIC 授予任何特权<br>PAGESIZE：单位为k，此选项设置默认的buffer pool，影响table spaces (SYSCATSPACE, TEMPSPACE1, USERSPACE1)，同时也是默认的buffer pool，table spaces属性</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db2 <span class="keyword">create</span> <span class="keyword">database</span> &lt;dbname&gt; <span class="keyword">on</span> ‘/db2fs1’,’/db2fs2’dbpath <span class="keyword">on</span></div><div class="line">‘/dbpath’<span class="keyword">using</span> codeset UTF<span class="number">-8</span> territory CN pagesize <span class="number">8192</span> restrictive</div></pre></td></tr></table></figure>
+<h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><blockquote>
+<p>大小不应该超过数据库可用内存50%<br>与表空间设计同时考虑<br>缓冲池个数尽量少<br>缺省缓冲 调整为固定大小</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> bufferpool &lt;bpname&gt; <span class="keyword">size</span> &lt;n&gt; pagesize <span class="number">8</span>k;</div><div class="line"><span class="keyword">alter</span> bufferpool ibmdefaultbp <span class="keyword">size</span> <span class="number">25600</span>;</div></pre></td></tr></table></figure>
+<h3 id="表空间设计"><a href="#表空间设计" class="headerlink" title="表空间设计"></a>表空间设计</h3><h3 id="日志设计"><a href="#日志设计" class="headerlink" title="日志设计"></a>日志设计</h3><h3 id="索引设计"><a href="#索引设计" class="headerlink" title="索引设计"></a>索引设计</h3><h2 id="设计专题"><a href="#设计专题" class="headerlink" title="设计专题"></a>设计专题</h2><h3 id="容量设计"><a href="#容量设计" class="headerlink" title="容量设计"></a>容量设计</h3><h2 id="示例语句"><a href="#示例语句" class="headerlink" title="示例语句"></a>示例语句</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/13/db2分区特性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1754,160 +1913,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/02/28/零开始学coding/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Stone">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/user/chongshi3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三只鱼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/28/零开始学coding/" itemprop="url">
-                  零开始学coding
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-28T22:24:31+08:00">
-                2017-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/02/28/零开始学coding/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/零开始学coding/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近学习前端的相关知识，感觉前端知识太多，变化太快，新的技术和组件，甚至是工具变化都很快，感觉学习前端要学好多东西，<strong>全栈工程师</strong>不容易啊，<a href="https://github.com">github</a>上好多国内的高手<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/02/28/零开始学coding/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1957,7 +1962,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
