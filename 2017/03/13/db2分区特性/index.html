@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
 架构上可以分为：共享内存， 共享存储， 无共享。">
-<meta property="og:updated_time" content="2017-03-13T09:12:01.237Z">
+<meta property="og:updated_time" content="2017-03-14T00:45:32.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2分区特性">
 <meta name="twitter:description" content="概述数据分区技术主要用于大容量数据的物理设计，主要特性包括：访问速度，数据隔离，数据扩展和数据运维几个方面。
@@ -553,11 +553,24 @@
 <tr>
 <td>哈希分区（Hash Partitioning）</td>
 <td>数据库分区（Database Partitioning）</td>
-<td>PARTITION BY</td>
+<td>PARTITION BY HASH</td>
+<td>DISTRIBUTE BY HASH</td>
+</tr>
+<tr>
+<td>列表分区（List Partitioning）</td>
+<td>带生成列表分区（Table Partitioning With Generated Column）</td>
+<td>PARTITION BY LIST</td>
+<td>PARTITION BY RANGE</td>
+</tr>
+<tr>
+<td>不支持</td>
+<td>多维集群（Multidimensional clustering）</td>
+<td>无</td>
+<td>ORGANIZE BY DIMENSION</td>
 </tr>
 </tbody>
 </table>
-<p>HASH |DISTRIBUTE BY HASH|<br>|列表分区（List Partitioning）|带生成列表分区（Table Partitioning With Generated Column）|PARTITION BY LIST|PARTITION BY RANGE|<br>|不支持 |多维集群（Multidimensional clustering）|无|ORGANIZE BY DIMENSION|<br>DB2的数据库分区特性采用Share-nothing架构，这种架构允许多个数据库分区在一起并行工作来处理工作负载。在Oracle中，使用Share-disk架构</p>
+<p>DB2的数据库分区特性采用Share-nothing架构，这种架构允许多个数据库分区在一起并行工作来处理工作负载。在Oracle中，使用Share-disk架构</p>
 <h2 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">　<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> partition_table</div><div class="line"></div><div class="line">　　(partition_date <span class="built_in">date</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</div><div class="line"></div><div class="line">　　partition_data <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line"></div><div class="line">　　)</div><div class="line"></div><div class="line">　　<span class="keyword">IN</span> tbsp_parts</div><div class="line"></div><div class="line">　　<span class="keyword">DISTRIBUTE</span> <span class="keyword">BY</span> <span class="keyword">HASH</span> (partition_date);</div></pre></td></tr></table></figure>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://tech.it168.com/a2012/0306/1321/000001321022_all.shtml" target="_blank" rel="external">IBM DB2关键特性解析：DB2分区特性</a><br><a href="https://www.ibm.com/support/knowledgecenter/zh/SSEPGG_9.7.0/com.ibm.db2.luw.admin.partition.doc/doc/c0021605.html" target="_blank" rel="external">IBM官网： 表分区和多维集群表</a></p>
 
