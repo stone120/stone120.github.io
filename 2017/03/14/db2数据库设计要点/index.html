@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://www.sillystone.info/2017/03/14/db2数据库设计要点/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="整体架构单分区SMP集群数据库Purescale多分区MPP：数据量大于2TB">
-<meta property="og:updated_time" content="2017-03-14T14:06:35.452Z">
+<meta property="og:updated_time" content="2017-03-16T13:52:31.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2数据库物理设计要点">
 <meta name="twitter:description" content="整体架构单分区SMP集群数据库Purescale多分区MPP：数据量大于2TB">
@@ -413,9 +413,10 @@
       
         <h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p>单分区SMP<br>集群数据库Purescale<br>多分区MPP：数据量大于2TB<br><a id="more"></a></p>
 <h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><h3 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h3><blockquote>
-<p>库名：XXXXDB<br>数据文件存储目录： 独立挂载，便于运维和扩展<br>数据库主目录：独立挂载，空间需求：小于10g<br>活动日志目录：独立挂载，容量设计（压测大小的1.5倍）<br>归档日志目录：独立挂载，容量设计（至少3天日志量，循环日志不需要配置）<br>代码页： UTF-8（1208）<br>RESTRICTIVE：如果未声明 则默认 restrictive 为no，默认赋值PUBLIC权限（下列数据库特权被自动授予 PUBLIC：对系统目录视图的 CREATETAB、BINDADD、CONNECT、IMPLICIT_SCHEMA 和 SELECT）。但是，如果有 RESTRICTIVE 选项，那么不会自动对 PUBLIC 授予任何特权<br>PAGESIZE：单位为k，此选项设置默认的buffer pool，影响table spaces (SYSCATSPACE, TEMPSPACE1, USERSPACE1)，同时也是默认的buffer pool，table spaces属性</p>
+<p>库名：XXXXDB<br>数据文件存储目录： 独立挂载，便于运维和扩展<br>数据库主目录：独立挂载，空间需求：小于10g<br>活动日志目录：独立挂载，容量设计（压测大小的1.5倍）<br>归档日志目录：独立挂载，容量设计（至少3天日志量，循环日志不需要配置）<br>代码页： UTF-8（1208）<br>RESTRICTIVE：如果未声明 则默认 restrictive 为no，默认赋值PUBLIC权限（下列数据库特权被自动授予 PUBLIC：对系统目录视图的 CREATETAB、BINDADD、CONNECT、IMPLICIT_SCHEMA 和 SELECT）。但是，如果有 RESTRICTIVE 选项，那么不会自动对 PUBLIC 授予任何特权.在此情况下对于应用服务器访问用户建议授权admin权限，对于其他用户单独授权，授权示例见下文<br>PAGESIZE：单位为k，此选项设置默认的buffer pool，影响table spaces (SYSCATSPACE, TEMPSPACE1, USERSPACE1)，同时也是默认的buffer pool，table spaces属性</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">db2 <span class="keyword">create</span> <span class="keyword">database</span> &lt;dbname&gt; <span class="keyword">on</span> ‘/db2fs1’,’/db2fs2’dbpath <span class="keyword">on</span></div><div class="line">‘/dbpath’<span class="keyword">using</span> codeset UTF<span class="number">-8</span> territory CN pagesize <span class="number">8192</span> restrictive</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db2 "<span class="keyword">grant</span> dbadm <span class="keyword">on</span> <span class="keyword">database</span> <span class="keyword">to</span> <span class="keyword">user</span> APPUSERNAME<span class="string">"</span></div><div class="line"></div><div class="line">db2 "<span class="keyword">grant</span> <span class="keyword">connect</span> <span class="keyword">on</span> <span class="keyword">database</span> <span class="keyword">to</span> <span class="keyword">user</span> $TARGET_USER<span class="string">"</span></div><div class="line">db2 "<span class="keyword">grant</span> <span class="keyword">usage</span> <span class="keyword">on</span> workload sysdefaultuserworkload  <span class="keyword">to</span> <span class="keyword">user</span> $TARGET_USER<span class="string">"</span></div><div class="line">db2 "<span class="keyword">grant</span> <span class="keyword">select</span>,<span class="keyword">insert</span>,<span class="keyword">update</span>,<span class="keyword">delete</span> <span class="keyword">on</span> <span class="keyword">table</span> $TAB_NAME <span class="keyword">to</span> <span class="keyword">user</span> $TARGET_USER<span class="string">"</span></div></pre></td></tr></table></figure>
 <h3 id="缓冲池"><a href="#缓冲池" class="headerlink" title="缓冲池"></a>缓冲池</h3><blockquote>
 <p>大小不应该超过数据库可用内存50%<br>与表空间设计同时考虑<br>缓冲池个数尽量少<br>缺省缓冲 调整为固定大小</p>
 </blockquote>
@@ -484,6 +485,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/16/跳槽/" rel="prev" title="跳槽">
+                跳槽 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -559,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -577,7 +582,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
