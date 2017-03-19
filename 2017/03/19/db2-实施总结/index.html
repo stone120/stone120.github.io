@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="针对参与实施的两个项目的数据库部分，总结如下。">
+<meta name="description" content="针对参与实施的两个项目的数据库部分，总结如下本文示例基于db2 10.5.0">
 <meta property="og:type" content="article">
 <meta property="og:title" content="db2 实施总结">
 <meta property="og:url" content="http://www.sillystone.info/2017/03/19/db2-实施总结/index.html">
 <meta property="og:site_name" content="三只鱼">
-<meta property="og:description" content="针对参与实施的两个项目的数据库部分，总结如下。">
-<meta property="og:updated_time" content="2017-03-19T02:55:46.239Z">
+<meta property="og:description" content="针对参与实施的两个项目的数据库部分，总结如下本文示例基于db2 10.5.0">
+<meta property="og:updated_time" content="2017-03-19T02:58:17.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2 实施总结">
-<meta name="twitter:description" content="针对参与实施的两个项目的数据库部分，总结如下。">
+<meta name="twitter:description" content="针对参与实施的两个项目的数据库部分，总结如下本文示例基于db2 10.5.0">
 
 
 
@@ -411,7 +411,7 @@
       
 
       
-        <p>针对参与实施的两个项目的数据库部分，总结如下。</p>
+        <p>针对参与实施的两个项目的数据库部分，总结如下<br><strong>本文示例基于db2 10.5.0</strong></p>
 <a id="more"></a>
 <h2 id="物理设计"><a href="#物理设计" class="headerlink" title="物理设计"></a>物理设计</h2><h3 id="表分区（Partition）"><a href="#表分区（Partition）" class="headerlink" title="表分区（Partition）"></a>表分区（Partition）</h3><p>表分区主要为了数据隔离，按分区操作效率高，按分区运维方便</p>
 <h4 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h4><p>分区按分区字段键值区间设置<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">"SCMNAME"</span>.<span class="string">"T_TABNAME"</span>  (</div><div class="line">                  <span class="string">"PART_COL"</span> <span class="built_in">VARCHAR</span>(<span class="number">12</span> OCTETS) ,</div><div class="line">                  <span class="string">"TAB_COL"</span> <span class="built_in">VARCHAR</span>(<span class="number">32</span> OCTETS) ,</div><div class="line">                  <span class="string">"TAB_COL2"</span> <span class="built_in">DECIMAL</span>(<span class="number">24</span>,<span class="number">6</span>) ,</div><div class="line">                  <span class="string">"REMARKS"</span> <span class="built_in">VARCHAR</span>(<span class="number">240</span> OCTETS)</div><div class="line">)</div><div class="line">         <span class="keyword">IN</span> <span class="string">"TBS_DATA_8K"</span></div><div class="line">         <span class="keyword">PARTITION</span> <span class="keyword">BY</span> <span class="keyword">RANGE</span>(PART_COL) </div><div class="line">        ( </div><div class="line">            <span class="keyword">STARTING</span> <span class="string">'001'</span> ENDING <span class="string">'002'</span>,</div><div class="line">            <span class="keyword">STARTING</span> <span class="string">'003'</span> ENDING <span class="string">'200'</span>,</div><div class="line">            <span class="keyword">STARTING</span> <span class="string">'201'</span> ENDING <span class="string">'400'</span>,</div><div class="line">            ENDING MAXVALUE</div><div class="line">        )</div></pre></td></tr></table></figure></p>
@@ -419,7 +419,7 @@
 <h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><p>默认为分区索引<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">主键/唯一索引 是全局索引</div><div class="line">``` sql</div></pre></td></tr></table></figure></p>
 <h4 id="运维"><a href="#运维" class="headerlink" title="运维"></a>运维</h4><p>清除某分区（比如：按日期分区）的数据<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure></p>
 <h3 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h3><h4 id="日志模式"><a href="#日志模式" class="headerlink" title="日志模式"></a>日志模式</h4><p>db2 默认为循环日志，开发和测试环境一般设置为循环日志，不可前滚恢复 不需要运维<br>归档日志，生产环境一般为此模式，模式选项包括：RETAIN， DISK 需指定日志路径</p>
-<p>以下示例基于db2 10.5.0<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db2 <span class="keyword">update</span> db cfg <span class="keyword">for</span> USER_DB_NAME <span class="keyword">using</span> LOGARCHMETH1 DISK:/db2arclog</div><div class="line"></div><div class="line"><span class="comment">-- 修改后需要备份和重启数据库</span></div><div class="line">db2stop <span class="keyword">force</span></div><div class="line">db2start</div><div class="line">db2 <span class="keyword">backup</span> db USER_DB_NAME <span class="keyword">to</span> /disk</div></pre></td></tr></table></figure></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">db2 <span class="keyword">update</span> db cfg <span class="keyword">for</span> USER_DB_NAME <span class="keyword">using</span> LOGARCHMETH1 DISK:/db2arclog</div><div class="line"></div><div class="line"><span class="comment">-- 修改后需要备份和重启数据库</span></div><div class="line">db2stop <span class="keyword">force</span></div><div class="line">db2start</div><div class="line">db2 <span class="keyword">backup</span> db USER_DB_NAME <span class="keyword">to</span> /disk</div></pre></td></tr></table></figure>
 <h4 id="日志路径"><a href="#日志路径" class="headerlink" title="日志路径"></a>日志路径</h4><p>缺省日志路径：/home/dbuser/dbinst/NODE0000/SQL00001/LOGSTREAM0000<br>修改：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db2 <span class="keyword">update</span> db cfg <span class="keyword">for</span> USER_DB_NAME <span class="keyword">using</span> NEWLOGPATH /db2actlog</div></pre></td></tr></table></figure></p>
 <h4 id="日志大小"><a href="#日志大小" class="headerlink" title="日志大小"></a>日志大小</h4><p>db2 操作时，可以认为一个事物内的所有数据库记录都在日志中记录， 如果某操作（特别是批量操作）处理了大量数据，那么将使用大量的数据库日志存储。</p>
 <p>日志总大小=单个日志大小 <em> (主日志个数 + 辅日志个数)<br>LOGFILSZ </em> (LOGPRIMARY + LOGSECOND)</p>
