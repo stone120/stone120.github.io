@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://www.sillystone.info/2017/03/21/jetty-调试/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="项目实践过的各种服务器调试总结，包括：IBM WAS， jetty">
-<meta property="og:updated_time" content="2017-03-29T09:21:28.540Z">
+<meta property="og:updated_time" content="2017-03-29T09:24:52.034Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web服务器 调试">
 <meta name="twitter:description" content="项目实践过的各种服务器调试总结，包括：IBM WAS， jetty">
@@ -493,7 +493,7 @@
 <p>javacore：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2CIUSERLIMIT   RLIMIT_NOFILE                         1024                65536</div><div class="line">2CIUSERLIMIT   RLIMIT_NPROC                          1024                20480</div></pre></td></tr></table></figure></p>
 <p>解决：<br>修改 /etc/security/limits.d/90-nproc.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*        soft    nproc     10240</div></pre></td></tr></table></figure></p>
 <p><strong>需要重新启动server nodeagent</strong></p>
-<p>可以参考<a href="">查看Linux进程资源</a>来确定进程的limits参数是否修改成功</p>
+<p>可以参考<a href="http://sillystone.info/2017/03/29/Linux%E7%9B%B8%E5%85%B3/" target="_blank" rel="external">查看Linux进程资源</a>来确定进程的limits参数是否修改成功</p>
 <p>3.</p>
 
       
