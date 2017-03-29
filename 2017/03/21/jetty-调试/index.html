@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jetty,java," />
+  <meta name="keywords" content="jetty,WAS,java," />
 
 
 
@@ -89,13 +89,13 @@
 
 <meta name="description" content="项目实践过的各种服务器调试总结，包括：IBM WAS， jetty">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jetty 调试">
+<meta property="og:title" content="web服务器 调试">
 <meta property="og:url" content="http://www.sillystone.info/2017/03/21/jetty-调试/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="项目实践过的各种服务器调试总结，包括：IBM WAS， jetty">
-<meta property="og:updated_time" content="2017-03-21T15:43:15.679Z">
+<meta property="og:updated_time" content="2017-03-29T09:21:28.540Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jetty 调试">
+<meta name="twitter:title" content="web服务器 调试">
 <meta name="twitter:description" content="项目实践过的各种服务器调试总结，包括：IBM WAS， jetty">
 
 
@@ -130,7 +130,7 @@
 
 
 
-  <title> jetty 调试 | 三只鱼 </title>
+  <title> web服务器 调试 | 三只鱼 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -328,7 +328,7 @@
             
             
               
-                jetty 调试
+                web服务器 调试
               
             
           </h1>
@@ -484,7 +484,18 @@
 <blockquote>
 <p>执行 visualVm<br>新建remote ，配置远程服务器的地址</p>
 </blockquote>
-<h2 id="后注"><a href="#后注" class="headerlink" title="后注"></a>后注</h2>
+<h2 id="后注"><a href="#后注" class="headerlink" title="后注"></a>后注</h2><h3 id="问题一：was-dump问题"><a href="#问题一：was-dump问题" class="headerlink" title="问题一：was dump问题"></a>问题一：was dump问题</h3><ol>
+<li><p>heap空间不足 导致dump，可以用IBM工具分析</p>
+</li>
+<li><p>系统资源不足<br>报错信息：java.lang.OutOfMemoryError: Failed to create a thread: retVal -1073741830, errno 11<br>系统资源不足，无法创建线程。</p>
+</li>
+</ol>
+<p>javacore：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2CIUSERLIMIT   RLIMIT_NOFILE                         1024                65536</div><div class="line">2CIUSERLIMIT   RLIMIT_NPROC                          1024                20480</div></pre></td></tr></table></figure></p>
+<p>解决：<br>修改 /etc/security/limits.d/90-nproc.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*        soft    nproc     10240</div></pre></td></tr></table></figure></p>
+<p><strong>需要重新启动server nodeagent</strong></p>
+<p>可以参考<a href="">查看Linux进程资源</a>来确定进程的limits参数是否修改成功</p>
+<p>3.</p>
+
       
     </div>
 
@@ -524,6 +535,8 @@
         <div class="post-tags">
           
             <a href="/tags/jetty/" rel="tag"># jetty</a>
+          
+            <a href="/tags/WAS/" rel="tag"># WAS</a>
           
             <a href="/tags/java/" rel="tag"># java</a>
           
@@ -577,7 +590,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/03/21/jetty-调试/"
-           data-title="jetty 调试" data-url="http://www.sillystone.info/2017/03/21/jetty-调试/">
+           data-title="web服务器 调试" data-url="http://www.sillystone.info/2017/03/21/jetty-调试/">
       </div>
     
   </div>
@@ -626,7 +639,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -644,7 +657,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -690,7 +703,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程实时调试服务器"><span class="nav-number">2.1.</span> <span class="nav-text">远程实时调试服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IBM-websphere"><span class="nav-number">2.1.1.</span> <span class="nav-text">IBM websphere</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jetty"><span class="nav-number">2.1.2.</span> <span class="nav-text">jetty</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析java-web-server运行状态"><span class="nav-number">2.2.</span> <span class="nav-text">分析java web server运行状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java自带工具"><span class="nav-number">2.2.1.</span> <span class="nav-text">java自带工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jps"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jstack"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">jstack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jmap-jhat"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">jmap jhat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#visualVm"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">visualVm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jstat"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hprof"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">hprof</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IBM-websphere-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">IBM websphere</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jetty-9"><span class="nav-number">2.2.3.</span> <span class="nav-text">jetty 9</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后注"><span class="nav-number">3.</span> <span class="nav-text">后注</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#远程实时调试服务器"><span class="nav-number">2.1.</span> <span class="nav-text">远程实时调试服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IBM-websphere"><span class="nav-number">2.1.1.</span> <span class="nav-text">IBM websphere</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jetty"><span class="nav-number">2.1.2.</span> <span class="nav-text">jetty</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析java-web-server运行状态"><span class="nav-number">2.2.</span> <span class="nav-text">分析java web server运行状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java自带工具"><span class="nav-number">2.2.1.</span> <span class="nav-text">java自带工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jps"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">jps</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jstack"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">jstack</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jmap-jhat"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">jmap jhat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#visualVm"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">visualVm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jstat"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">jstat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#hprof"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">hprof</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IBM-websphere-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">IBM websphere</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jetty-9"><span class="nav-number">2.2.3.</span> <span class="nav-text">jetty 9</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后注"><span class="nav-number">3.</span> <span class="nav-text">后注</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题一：was-dump问题"><span class="nav-number">3.1.</span> <span class="nav-text">问题一：was dump问题</span></a></li></ol></li></ol></div>
             
 
           </div>
