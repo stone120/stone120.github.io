@@ -308,6 +308,176 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/06/11/一道考题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stone">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user/chongshi3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三只鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/11/一道考题/" itemprop="url">
+                  一道考题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-11T22:34:13+08:00">
+                2017-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/06/11/一道考题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/11/一道考题/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="beginning"><a href="#beginning" class="headerlink" title="beginning"></a>beginning</h2><p>单位组织编程比赛，要求在线编写代码，要求高性能执行。<br>题目据说包括： </p>
+<ol>
+<li>大量数据 文件</li>
+<li>数据高效处理</li>
+<li>实时界面交互</li>
+</ol>
+<p>环境： 百度云，centos</p>
+<h2 id="prepare"><a href="#prepare" class="headerlink" title="prepare"></a>prepare</h2><h3 id="day-1"><a href="#day-1" class="headerlink" title="day 1"></a>day 1</h3><p>主流大数据 框架<br>!(spark-storm)[<a href="http://om49hkcv7.bkt.clouddn.com/spark-storm-hadhoop.jpg" target="_blank" rel="external">http://om49hkcv7.bkt.clouddn.com/spark-storm-hadhoop.jpg</a>]<br>以上内容都基于hadoop， storm还依赖zookeeper 暂时忽略。</p>
+<p>(storm example)[<a href="http://www.aloo.me/2016/08/14/%E5%9C%A8Storm%E4%B8%AD%E6%93%8D%E4%BD%9CHBase/" target="_blank" rel="external">http://www.aloo.me/2016/08/14/%E5%9C%A8Storm%E4%B8%AD%E6%93%8D%E4%BD%9CHBase/</a>]</p>
+<p>(spark start)[<a href="http://www.powerxing.com/spark-quick-start-guide/" target="_blank" rel="external">http://www.powerxing.com/spark-quick-start-guide/</a>]</p>
+<p>(netty)[<a href="http://netty.io/" target="_blank" rel="external">http://netty.io/</a>]</p>
+<p>java 并发<br>(java 并发介绍) [<a href="http://www.importnew.com/14506.html" target="_blank" rel="external">http://www.importnew.com/14506.html</a>]</p>
+<p>(oracle example)[<a href="http://www.oracle.com/technetwork/cn/articles/java/fork-join-422606-zhs.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/articles/java/fork-join-422606-zhs.html</a>]<br>(示例程序)[<a href="https://my.oschina.net/shenxueliang/blog/136488" target="_blank" rel="external">https://my.oschina.net/shenxueliang/blog/136488</a>]</p>
+<p>java并行框架</p>
+<ol>
+<li>(akka)[<a href="http://akka.io/docs/" target="_blank" rel="external">http://akka.io/docs/</a>]  (introduce)[<a href="http://blog.csdn.net/jmppok/article/details/17264495" target="_blank" rel="external">http://blog.csdn.net/jmppok/article/details/17264495</a>]  (要点介绍)[<a href="http://shiyanjun.cn/archives/1168.html" target="_blank" rel="external">http://shiyanjun.cn/archives/1168.html</a>]</li>
+<li></li>
+</ol>
+<p>nodejs 框架<br>适合IO高并发， 对于CPU 并行计算。。。</p>
+<p>erlang<br>待了解</p>
+<h2 id="adds"><a href="#adds" class="headerlink" title="adds"></a>adds</h2><h3 id="benchmark-tool"><a href="#benchmark-tool" class="headerlink" title="benchmark tool"></a>benchmark tool</h3><p>(wrk - a HTTP benchmarking tool)[<a href="https://github.com/wg/wrk" target="_blank" rel="external">https://github.com/wg/wrk</a>]</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/06/02/欢乐颂/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1725,176 +1895,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/28/批量设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Stone">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/user/chongshi3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三只鱼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/28/批量设计/" itemprop="url">
-                  批量设计
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-28T10:04:14+08:00">
-                2017-03-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/28/批量设计/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/28/批量设计/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>批量作业相对于联机交易而言，主要用于实现数据加工（计算，统计）</p>
-<p>一般批量作业的特点</p>
-<ol>
-<li><p>大量数据筛选，加工。消耗数据库资源：CPU/IO</p>
-<blockquote>
-<p>利用数据库存储过程，数据处理在数据库上执行<br>数据加工过程使用临时表<br>大量数据处理，使用游标分批加工，减少日志空间的消耗，和错误引起执行效率底下问题<br>数据导入导出使用数据库工具（DB2：load/import）</p>
-</blockquote>
-</li>
-<li><p>数据库上执行，存在单点问题</p>
-</li>
-<li>加工过程不易输出异常信息</li>
-</ol>
-<p>特定需求：</p>
-<blockquote>
-<p>7*24小时服务，系统不停机 （数据库资源不能消耗太高）<br>全球服务：业务数据隔离， 批处理调度作业按时区划分<br>并行处理设计（基于应用服务器）</p>
-</blockquote>
-<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/28/批量设计/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1944,7 +1944,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1962,7 +1962,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
