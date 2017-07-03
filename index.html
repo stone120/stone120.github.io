@@ -308,6 +308,186 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/07/03/阿里RocketMQ开发者见面会/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stone">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user/chongshi3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三只鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/03/阿里RocketMQ开发者见面会/" itemprop="url">
+                  阿里RocketMQ开发者见面会
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-03T12:21:17+08:00">
+                2017-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/03/阿里RocketMQ开发者见面会/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/03/阿里RocketMQ开发者见面会/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="故事"><a href="#故事" class="headerlink" title="故事"></a>故事</h2><p>自从上次被阿里面试虐过一次后，最近研究了一下流行的分布式系统技术架构。 阿里的rocketMQ<br>最近加入了apache基金会阵营，也一下变得火了。</p>
+<p>35度的北京， 会场满满的都是人（估计这么一屋子IT合起来的估值也不小）</p>
+<p>会议组织的一般，节奏，内容，互动都没有很好。案例分享也没有含金量。 </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="apache-开源项目"><a href="#apache-开源项目" class="headerlink" title="apache 开源项目"></a>apache 开源项目</h3><ol>
+<li>开源协议介绍（单位里也介绍过，了解更多了）</li>
+<li>社区，相关参与角色的介绍</li>
+<li>社区贡献决定了在项目中的地位</li>
+</ol>
+<h3 id="产品总结"><a href="#产品总结" class="headerlink" title="产品总结"></a>产品总结</h3><ol>
+<li><p>消息处理：kafka VS RocketMQ</p>
+</li>
+<li><p>流式 实时/批量处理：flink/storm/spark stream VS spark/hadoop<br>flink 已试用</p>
+</li>
+<li><p>框架： beam </p>
+</li>
+<li><p>分布式日志收集，处理：Flume</p>
+</li>
+</ol>
+<h3 id="主题内容"><a href="#主题内容" class="headerlink" title="主题内容"></a>主题内容</h3><p>1、分布式消息引擎最佳实践<br>主要分享分布式消息引擎的功能特性(顺序消息、SQL Filtering、 Batch、 LogAppender), 使用场景（金融交易、大数据等），以及生产实践的常用问题</p>
+<p>2、分布式消息引擎性能优化及大数据生态<br>主要分享百万吞吐与低延迟的奥秘，RocketMQ与Kafka的对比，阿里云上Kafka的优化与实施</p>
+<p>周新宇：Apache RocketMQ PMC/Committer，2015年阿里巴巴性能挑战大赛冠军。目前主要负责消息引擎RocketMQ的性能优化，规范演进以及社区输出</p>
+<p>3、基于分布式消息引擎的流计算<br>本主题主要分享对流处理和消息系统的理解，以及在项目实践过程中流处理和消息系统集成的经验等。</p>
+<p>王鑫：Apache Storm PMC/Committer，流处理技术专家，开源爱好者。5年高性能分布式系统研发经验。负责过分布式网络爬虫、内容聚合、用户行为分析、个性化推荐等大数据项目。目前主要兴趣在于分布式流处理引擎、分布式消息引擎等。对分布式系统的架构及调优有丰富经验。</p>
+<pre><code>storm作为流式计算的案例分享
+</code></pre><p>4、RocketMQ-MySQL-Connector项目介绍<br>主要分享RocketMQ-MySQL-Connector项目的应用场景，目前的进展情况以及未来的规划。</p>
+<p>赵群：Apache RocketMQ Contributor，开源爱好者，多年高并发系统架构经验，目前从事通信平台建设工作，主要关注分布式系统、网络通信等领域。</p>
+<pre><code>可以用于 数据库复制/数据在线迁移的工具， 介绍了实践案例：是基于数据库日志的事物读取
+并通过RocketMQ 发送给下游的应用
+</code></pre><ol>
+<li>Apache Way：如何打造世界级软件产品<br>主要分享对Apache Way的理解，建设Apache社区的经验，以及如何打造一款能在世界范围内被认可的软件产品</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/06/24/奇葩说/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1736,158 +1916,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/03/29/Linux相关/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Stone">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/user/chongshi3.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三只鱼">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/29/Linux相关/" itemprop="url">
-                  Linux相关
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-29T17:14:32+08:00">
-                2017-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/29/Linux相关/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/29/Linux相关/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Linux 相关总结</p>
-<h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><h2 id="系统资源"><a href="#系统资源" class="headerlink" title="系统资源"></a>系统资源</h2><h3 id="进程资源"><a href="#进程资源" class="headerlink" title="进程资源"></a>进程资源</h3><p>目录：/proc/进程ID/<br>可查看某个进程的相关信息， 其中limits文件中包含该进程相关信息，示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Limit                     Soft Limit   ... </div><div class="line">Max cpu time              unlimited </div><div class="line">Max file size             unlimited </div><div class="line">Max data size             unlimited </div><div class="line">Max stack size            10485760   </div><div class="line">Max core file size        unlimited </div><div class="line">Max processes             unlimited </div><div class="line">Max open files            8192</div></pre></td></tr></table></figure></p>
-<p>### </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1937,7 +1965,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1955,7 +1983,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
