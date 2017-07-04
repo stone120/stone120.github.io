@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="mariadb," />
 
 
 
@@ -87,16 +87,22 @@
 
 
 
-<meta name="description" content="给有限的未来一点想象">
+<meta name="description" content="存储引擎存储引擎介绍
+XtraDB is the best choice in the majority of cases. It is a performance-enhanced fork of InnoDB and is MariaDB&amp;apos;s default engine until MariaDB 10.1.
+InnoDB is a good general transaction">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mariadb">
 <meta property="og:url" content="http://www.sillystone.info/2017/07/04/mariadb/index.html">
 <meta property="og:site_name" content="三只鱼">
-<meta property="og:description" content="给有限的未来一点想象">
-<meta property="og:updated_time" content="2017-07-04T07:23:59.197Z">
+<meta property="og:description" content="存储引擎存储引擎介绍
+XtraDB is the best choice in the majority of cases. It is a performance-enhanced fork of InnoDB and is MariaDB&amp;apos;s default engine until MariaDB 10.1.
+InnoDB is a good general transaction">
+<meta property="og:updated_time" content="2017-07-04T15:57:13.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mariadb">
-<meta name="twitter:description" content="给有限的未来一点想象">
+<meta name="twitter:description" content="存储引擎存储引擎介绍
+XtraDB is the best choice in the majority of cases. It is a performance-enhanced fork of InnoDB and is MariaDB&amp;apos;s default engine until MariaDB 10.1.
+InnoDB is a good general transaction">
 
 
 
@@ -354,6 +360,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -389,7 +417,14 @@
       
 
       
-        
+        <h2 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h2><p><a href="https://mariadb.com/kb/en/mariadb/choosing-the-right-storage-engine/" target="_blank" rel="external">存储引擎介绍</a></p>
+<pre><code>XtraDB is the best choice in the majority of cases. It is a performance-enhanced fork of InnoDB and is MariaDB&apos;s default engine until MariaDB 10.1.
+InnoDB is a good general transaction storage engine. It is the default MySQL storage engine, and default MariaDB 10.2 storage engine, but in earlier releases XtraDB is a performance enhanced fork of InnoDB, and is usually preferred.
+Aria, MariaDB&apos;s more modern improvement on MyISAM, has a small footprint and allows for easy copying between systems.
+MyISAM has a small footprint and allows for easy copying between systems. MyISAM is MySQL&apos;s oldest storage engine. There is usually little reason to use it except for legacy purposes. Aria is MariaDB&apos;s more modern improvement.
+</code></pre><a id="more"></a>
+<p>InnODB引擎支持众多特性：<br>a) 支持ACID，简单地说就是支持事务完整性、一致性；<br>b) 支持行锁，以及类似ORACLE的一致性读，多用户并发；<br>c) 独有的聚集索引主键设计方式，可大幅提升并发读写性能；<br>d) 支持外键；<br>e) 支持崩溃数据自修复；</p>
+
       
     </div>
 
@@ -425,6 +460,12 @@
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mariadb/" rel="tag"># mariadb</a>
+          
+        </div>
       
 
       
@@ -494,8 +535,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/user/chongshi3.jpg"
@@ -528,7 +578,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -582,6 +632,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#存储引擎"><span class="nav-number">1.</span> <span class="nav-text">存储引擎</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
