@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://www.sillystone.info/2017/07/04/redis-config/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="detail info">
-<meta property="og:updated_time" content="2017-07-08T13:24:46.419Z">
+<meta property="og:updated_time" content="2017-07-20T12:29:36.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis">
 <meta name="twitter:description" content="detail info">
@@ -418,14 +418,21 @@
 <li>节点间数据自动同步</li>
 <li>节点间数据自动分配</li>
 <li>故障隔离</li>
+<li>所有节点彼此互联，使用二进制协议传输</li>
+<li>客户端可以连接任意结点（不区分master slave）</li>
 </ol>
 <p>集群实现： </p>
 <ol>
 <li>ex. server port is 6379; another tcp port 16379(adding 10000) used as cluster bus(故障检查，配置更新 etc)</li>
-<li>hash slot， 16384，</li>
+<li>hash slot， 0-16383，集群负责维护node和slot和value的映射，</li>
 <li>Consistency guarantees：无法保证strong guarantee。Basically there is a trade-off to take between performance and consistency.</li>
 </ol>
-<p>集群配置：</p>
+<p>集群配置：<br>1.依赖软件： ruby-2.3.1.tar.gz rubygem-2.6.6.zip redis-3.3.1.gem redis-3.2.3</p>
+<p>高可用：</p>
+<ol>
+<li>集群包含多个组， 每个组由一个master和至少1个slave组成； 同组内的结点的数据一致</li>
+<li>集群不可用: 任意master不可用&amp;&amp;无slave， 此时集群的slot[0-16383]不完全覆盖<br>参数：cluster-require-full-coverage 默认配置为yes，部分宕机 其他节点不对外服务 </li>
+</ol>
 <h3 id="piple"><a href="#piple" class="headerlink" title="piple"></a>piple</h3><p>大量数据加载，通过数据文件形式执行<br>cat data.txt | redis-cli –pipe</p>
 <h3 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h3><p>redis partition 和数据库分库类似， 将数据分布在多个实体上</p>
 <p>需要解决的问题是： 键值分配规则</p>
