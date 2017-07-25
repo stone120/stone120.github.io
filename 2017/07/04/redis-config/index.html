@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://www.sillystone.info/2017/07/04/redis-config/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="detail info">
-<meta property="og:updated_time" content="2017-07-20T12:29:36.725Z">
+<meta property="og:updated_time" content="2017-07-25T08:26:19.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis">
 <meta name="twitter:description" content="detail info">
@@ -413,7 +413,7 @@
       
         <p>detail info </p>
 <a id="more"></a>
-<h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><h3 id="cluster"><a href="#cluster" class="headerlink" title="cluster"></a>cluster</h3><p>特点：</p>
+<h3 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h3><h3 id="cluster"><a href="#cluster" class="headerlink" title="cluster"></a>cluster</h3><p><a href="https://redis.io/topics/cluster-spec" target="_blank" rel="external">redis cluster 官方介绍</a><br>特点：</p>
 <ol>
 <li>节点间数据自动同步</li>
 <li>节点间数据自动分配</li>
@@ -425,7 +425,7 @@
 <ol>
 <li>ex. server port is 6379; another tcp port 16379(adding 10000) used as cluster bus(故障检查，配置更新 etc)</li>
 <li>hash slot， 0-16383，集群负责维护node和slot和value的映射，</li>
-<li>Consistency guarantees：无法保证strong guarantee。Basically there is a trade-off to take between performance and consistency.</li>
+<li>Consistency guarantees：无法保证strong guarantee, Basically there is a trade-off to take between performance and consistency.</li>
 </ol>
 <p>集群配置：<br>1.依赖软件： ruby-2.3.1.tar.gz rubygem-2.6.6.zip redis-3.3.1.gem redis-3.2.3</p>
 <p>高可用：</p>
@@ -433,6 +433,12 @@
 <li>集群包含多个组， 每个组由一个master和至少1个slave组成； 同组内的结点的数据一致</li>
 <li>集群不可用: 任意master不可用&amp;&amp;无slave， 此时集群的slot[0-16383]不完全覆盖<br>参数：cluster-require-full-coverage 默认配置为yes，部分宕机 其他节点不对外服务 </li>
 </ol>
+<p>对client来说： </p>
+<ol>
+<li>集群是一个整体，数据按key的slot计算方法 分配到不同node的不同slot， 当client访问<br>任意一个集群node，get某个key时，如果此key不在此node，则返回 该key所属的redirect信息：<br>MOVED xxx ip:port</li>
+<li>client如果随机访问集群的某个node，很大概率需要通过redirect信息 再次访问正确的node<br>这样处理的效率很低，正确的处理方式是client记录集群的node slot分配信息，每次访问时按照<br>key计算的slot 访问具体的某个node。<br>参考：spring-data-redis中的实现机制<br>ClusterTopology类中 getKeyServingMasterNode 可以获取key对应的node<br>ClusterSlotHashUtil类中 calculateSlot实现了redis的slot分配策略</li>
+</ol>
+<p>jedis模块实现了java连接redis的具体实现，redis的接口命令在此模块中都有实现</p>
 <h3 id="piple"><a href="#piple" class="headerlink" title="piple"></a>piple</h3><p>大量数据加载，通过数据文件形式执行<br>cat data.txt | redis-cli –pipe</p>
 <h3 id="partition"><a href="#partition" class="headerlink" title="partition"></a>partition</h3><p>redis partition 和数据库分库类似， 将数据分布在多个实体上</p>
 <p>需要解决的问题是： 键值分配规则</p>
@@ -600,7 +606,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
