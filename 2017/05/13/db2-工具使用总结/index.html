@@ -67,7 +67,7 @@
 <meta property="og:url" content="http://www.sillystone.info/2017/05/13/db2-工具使用总结/index.html">
 <meta property="og:site_name" content="三只鱼">
 <meta property="og:description" content="常用工具包括：db2top db2pd, db2load db2import以下详细说明每个工具使用总结">
-<meta property="og:updated_time" content="2017-05-13T02:19:28.578Z">
+<meta property="og:updated_time" content="2017-08-08T09:48:31.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="db2 工具使用总结">
 <meta name="twitter:description" content="常用工具包括：db2top db2pd, db2load db2import以下详细说明每个工具使用总结">
@@ -424,7 +424,13 @@ NONRECOVERABLE
 Specifies that the load transaction is to be marked as unrecoverable and that it will not be possible to recover it by a subsequent roll forward action. The roll forward utility will skip the transaction and will mark the table into which data was being loaded as &quot;invalid&quot;. The utility will also ignore any subsequent transactions against that table. After the roll forward operation is completed, such a table can only be dropped or restored from a backup (full or table space) taken after a commit point following the completion of the nonrecoverable load operation.
 With this option, table spaces are not put in backup pending state following the load operation, and a copy of the loaded data does not have to be made during the load operation. If one of COPY NO, COPY
 YES, or NONRECOVERABLE is not specified, and the database is not recoverable (logarchmeth1 and logarchmeth2 are both set to OFF), then NONRECOVERABLE is the default.
-</code></pre>
+</code></pre><h2 id="db2look"><a href="#db2look" class="headerlink" title="db2look"></a>db2look</h2><ol>
+<li><p>导出表结构<br>db2look -d db_name -e  -o output</p>
+</li>
+<li><p>导出数据表，权限，表空间和缓冲，<br>db2look -d db_name -e -a -l -x -o output</p>
+</li>
+</ol>
+
       
     </div>
 
@@ -567,7 +573,7 @@ YES, or NONRECOVERABLE is not specified, and the database is not recoverable (lo
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -585,7 +591,7 @@ YES, or NONRECOVERABLE is not specified, and the database is not recoverable (lo
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">41</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -658,7 +664,7 @@ YES, or NONRECOVERABLE is not specified, and the database is not recoverable (lo
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能工具"><span class="nav-number">1.</span> <span class="nav-text">性能工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份-恢复"><span class="nav-number">2.</span> <span class="nav-text">备份/恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">2.1.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load"><span class="nav-number">2.2.</span> <span class="nav-text">load</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#性能工具"><span class="nav-number">1.</span> <span class="nav-text">性能工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份-恢复"><span class="nav-number">2.</span> <span class="nav-text">备份/恢复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#import"><span class="nav-number">2.1.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#load"><span class="nav-number">2.2.</span> <span class="nav-text">load</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#db2look"><span class="nav-number">3.</span> <span class="nav-text">db2look</span></a></li></ol></div>
             
 
           </div>
