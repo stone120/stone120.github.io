@@ -73,7 +73,7 @@
 日志来源于两台服务器上的2个（4个： 2*2）应用； 日志采用log4j格式打印，目前设置日志级别为INFO，因此日志量比较大。 
 解决的问题： 登录多个服务器上查找日志
 环境&amp;a">
-<meta property="og:updated_time" content="2017-08-14T15:52:27.458Z">
+<meta property="og:updated_time" content="2017-08-14T15:58:09.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK">
 <meta name="twitter:description" content="案例背景介绍本来想学用一下flume， 把多台服务器的日志做统一处理，查阅资料后发现ELK更适合就尝试着搭建了ELK服务， 其实是ELKF（Elasticsearch logstash kibana Filebeat）
@@ -370,6 +370,7 @@
 <p>日志来源于两台服务器上的2个（4个： 2*2）应用； 日志采用log4j格式打印，目前设置日志级别<br>为INFO，因此日志量比较大。 </p>
 <p>解决的问题： 登录多个服务器上查找日志</p>
 <h3 id="环境-amp-部署"><a href="#环境-amp-部署" class="headerlink" title="环境&amp;部署"></a>环境&amp;部署</h3><p>filebeat分别部署在2台应用服务器上，logstash单独部署（grok耗费资源），es和kibana部署在一台服务器（es作为存储 需提前分配存储空间）</p>
+<a id="more"></a>
 <h2 id="Filebeat"><a href="#Filebeat" class="headerlink" title="Filebeat"></a>Filebeat</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>使用filebeat是因为 主要担心logstash与应用服务器 抢占资源。<br>filebeat支持直接输出到elasticsearch（日志文件为json格式可以直接输出到es），也可以输出<br>到logstash（本案例使用grok解析日志格式），也支持Redis 和 RocketMQ</p>
 <h3 id="安装-linux-x86-64"><a href="#安装-linux-x86-64" class="headerlink" title="安装 -linux x86_64"></a>安装 -linux x86_64</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.0.0-beta1-linux-x86_64.tar.gz</div></pre></td></tr></table></figure>
 <p><a href="https://www.elastic.co/downloads/beats/filebeat" target="_blank" rel="external">官网下载 其他版本</a></p>
