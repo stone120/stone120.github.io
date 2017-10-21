@@ -1,0 +1,963 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="文摘,数据挖掘," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="2 数据挖掘概述2.2 数据分析和数据挖掘对具体的业务分析需求，确定分析思路，挑选和匹配适合的分析算法和分析技术； 一个具体的分析需求一般会有两种以上不同的思路和算法可以去探索，最后可根据验证的效果和资源匹配等因素经行综合权衡。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据挖掘与数据化运营实战：思路 方法 技巧和应用">
+<meta property="og:url" content="http://www.sillystone.info/2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/index.html">
+<meta property="og:site_name" content="三只鱼">
+<meta property="og:description" content="2 数据挖掘概述2.2 数据分析和数据挖掘对具体的业务分析需求，确定分析思路，挑选和匹配适合的分析算法和分析技术； 一个具体的分析需求一般会有两种以上不同的思路和算法可以去探索，最后可根据验证的效果和资源匹配等因素经行综合权衡。">
+<meta property="og:updated_time" content="2017-10-21T13:06:34.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据挖掘与数据化运营实战：思路 方法 技巧和应用">
+<meta name="twitter:description" content="2 数据挖掘概述2.2 数据分析和数据挖掘对具体的业务分析需求，确定分析思路，挑选和匹配适合的分析算法和分析技术； 一个具体的分析需求一般会有两种以上不同的思路和算法可以去探索，最后可根据验证的效果和资源匹配等因素经行综合权衡。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.sillystone.info/2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/"/>
+
+
+
+
+
+  <title> 数据挖掘与数据化运营实战：思路 方法 技巧和应用 | 三只鱼 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?86ab29a47f33f27861d07046a976e285";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">三只鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">发掘美好</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.sillystone.info/2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Stone">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/user/chongshi3.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三只鱼">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据挖掘与数据化运营实战：思路 方法 技巧和应用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-21T11:24:00+08:00">
+                2017-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="2-数据挖掘概述"><a href="#2-数据挖掘概述" class="headerlink" title="2 数据挖掘概述"></a>2 数据挖掘概述</h1><h2 id="2-2-数据分析和数据挖掘"><a href="#2-2-数据分析和数据挖掘" class="headerlink" title="2.2 数据分析和数据挖掘"></a>2.2 数据分析和数据挖掘</h2><p>对具体的业务分析需求，确定分析思路，挑选和匹配适合的分析算法和分析技术； 一个具体的分析需求一般会有两种以上不同的思路和算法可以去探索，最后可根据验证的效果和资源匹配等因素经行综合权衡。</p>
+<a id="more"></a>
+<h2 id="2-3-数据挖掘成熟技术"><a href="#2-3-数据挖掘成熟技术" class="headerlink" title="2.3 数据挖掘成熟技术"></a>2.3 数据挖掘成熟技术</h2><h3 id="2-3-1-决策树"><a href="#2-3-1-决策树" class="headerlink" title="2.3.1 决策树"></a>2.3.1 决策树</h3><p>不依赖领域知识，适合探索式挖掘，可以处理高维度数据，对数据分不宽容，不受极值影响</p>
+<p>CHAID<br>CART Classification and Regression Tree<br>ID3 Iterative Dichotomiser</p>
+<p>用户划分，行为预测，规则梳理。 可以作为其他模型的变量筛选方法</p>
+<h3 id="2-3-2-神经网络"><a href="#2-3-2-神经网络" class="headerlink" title="2.3.2 神经网络"></a>2.3.2 神经网络</h3><p>机器学习的典型代表。 是通过输入多个非线性模型以及不同模型之间的加权互联（加权的过程在隐蔽层完成） 最终得到一个输出模型。隐蔽层包含的是非线性函数。</p>
+<p>神经网络算法：反馈传播 Backpropagation. </p>
+<p>应用：信号处理，模式识别，专家系统，预测系统<br>影响因素： 层数， 每层输入变量的数量，联系的种类， 联系的程度， 转换函数</p>
+<p>用户划分，行为预测，营销响应</p>
+<h3 id="2-3-3-回归"><a href="#2-3-3-回归" class="headerlink" title="2.3.3 回归"></a>2.3.3 回归</h3><p>回归：Regression 包括 线性回归（Linear Regression） 多元线性回归和逻辑斯蒂回归（Logistic Regression）</p>
+<h3 id="2-3-4-关联规则"><a href="#2-3-4-关联规则" class="headerlink" title="2.3.4 关联规则"></a>2.3.4 关联规则</h3><p>Association Rule 目的： 找出数据集中的频繁模式（Frequent Pattern）并发关系（<br>Concurrence Relationships）<br>案例; 购物篮分析 Basket Analysis， 通过分析用户购物篮中的商品之间的关系，挖掘用户习惯<br>从而制定更好的营销策略。</p>
+<p>支持度 Support 和置信度Confidence是衡量关联规则强度的两个重要指标</p>
+<p>支持度 规则X-&gt;Y 指事物全集包含X并Y的事物百分比。 衡量规则的有用性<br>置信度 规则X-&gt;Y 指即包含X又包含Y的事物数量占所有包含X的事物数量的百分比 衡量确定性/可预测性</p>
+<p>算法：Apriori算法：<br>1.生成所有的频繁项目集。一个频繁项目集Frequent Itemset是一个支持度高于最小支持阈值min-sup 的项目集<br>2.从频繁项目集中生成所有的可信关联规则。 可信关联规则是指置信度大于最小置信阈值的规则 min-conf</p>
+<h3 id="2-3-5-聚类"><a href="#2-3-5-聚类" class="headerlink" title="2.3.5 聚类"></a>2.3.5 聚类</h3><p>Clustering<br>算法：划分方法(partitioning Method) 层次方法(Hierarchical Method) 基于密度的方法(Density-based Method) 基于网络的方法(Grid-based Method) 基于模型的方法(Model-based Method)</p>
+<p>k-means方法（划分方法）；首先 随机选择K个对象，并且所选择的每个对象都代表一个组的初始均值或初始的组中心值； 对剩余的每个对象 根据其与各个组初始均值的距离，将他们分配给最近的小组。然后重新计算每个小组新的均值；这个过程不断重复，直到所有的对象在k组分布中都找到了离自己最近的组</p>
+<p>层次方法：依次让最相似的数据对象两两合并，这样不断合并，最终形成一颗聚类树</p>
+<h3 id="2-3-6-贝叶斯分类方法"><a href="#2-3-6-贝叶斯分类方法" class="headerlink" title="2.3.6 贝叶斯分类方法"></a>2.3.6 贝叶斯分类方法</h3><p>Bayesian Classifier</p>
+<h3 id="2-3-7-支持向量机"><a href="#2-3-7-支持向量机" class="headerlink" title="2.3.7 支持向量机"></a>2.3.7 支持向量机</h3><p>Support Vector Machine  神经网络相比，它不仅结构简单，各项技术的性能也得到提升</p>
+<h3 id="2-3-8-主成成分分析"><a href="#2-3-8-主成成分分析" class="headerlink" title="2.3.8 主成成分分析"></a>2.3.8 主成成分分析</h3><p>Principal components Analysis 属于传统的统计分析技术</p>
+<p>主要用于数据处理，降维，变量间关系的探索。</p>
+<h3 id="2-3-9-假设检验"><a href="#2-3-9-假设检验" class="headerlink" title="2.3.9 假设检验"></a>2.3.9 假设检验</h3><p>Hypothesis Test<br>用于 运营效果的评估</p>
+<h1 id="3-数据化运营中常见的数据分析项目类型"><a href="#3-数据化运营中常见的数据分析项目类型" class="headerlink" title="3 数据化运营中常见的数据分析项目类型"></a>3 数据化运营中常见的数据分析项目类型</h1><h2 id="3-1-目标客户的特征分析"><a href="#3-1-目标客户的特征分析" class="headerlink" title="3.1 目标客户的特征分析"></a>3.1 目标客户的特征分析</h2><h2 id="3-2-目标客户的预测（响应，分类）模型"><a href="#3-2-目标客户的预测（响应，分类）模型" class="headerlink" title="3.2 目标客户的预测（响应，分类）模型"></a>3.2 目标客户的预测（响应，分类）模型</h2><p>流失预警模型，付费预测模型，续费预测模型等<br>逻辑回归 决策树 神经网络 支持向量机</p>
+<h2 id="3-3-运营群体的活跃度定义"><a href="#3-3-运营群体的活跃度定义" class="headerlink" title="3.3. 运营群体的活跃度定义"></a>3.3. 运营群体的活跃度定义</h2><ol>
+<li>主成分分析 多个核心行为转换为一个或者少数几个主成分，最终转化为综合的分数</li>
+<li>数据的标准化 不同的指标有不同的度量尺度，只有标准化后 才可以将数据按比例缩放</li>
+</ol>
+<h2 id="3-4-用户路径分析"><a href="#3-4-用户路径分析" class="headerlink" title="3.4 用户路径分析"></a>3.4 用户路径分析</h2><p>运营部门 产品设计部门PD 用户体验设计部门 User Experience Design UED</p>
+<p>数据来源与：web服务器的日志数据</p>
+<p>运营部门：提升用户点击页面的效率，调整运营策略<br>产品： 产品优化，冷僻功能是否有必要取消或者优化</p>
+<h2 id="3-5-交叉销售模型"><a href="#3-5-交叉销售模型" class="headerlink" title="3.5 交叉销售模型"></a>3.5 交叉销售模型</h2><h2 id="3-6-信息质量模型"><a href="#3-6-信息质量模型" class="headerlink" title="3.6 信息质量模型"></a>3.6 信息质量模型</h2><h2 id="3-7-服务保障模型"><a href="#3-7-服务保障模型" class="headerlink" title="3.7 服务保障模型"></a>3.7 服务保障模型</h2><h2 id="3-8-用户（买家，卖家）分层模型"><a href="#3-8-用户（买家，卖家）分层模型" class="headerlink" title="3.8 用户（买家，卖家）分层模型"></a>3.8 用户（买家，卖家）分层模型</h2><h2 id="3-9-卖家（买家）交易模型"><a href="#3-9-卖家（买家）交易模型" class="headerlink" title="3.9 卖家（买家）交易模型"></a>3.9 卖家（买家）交易模型</h2><h2 id="3-10-信用风险模型"><a href="#3-10-信用风险模型" class="headerlink" title="3.10 信用风险模型"></a>3.10 信用风险模型</h2><h2 id="3-11-商品推荐模型"><a href="#3-11-商品推荐模型" class="headerlink" title="3.11 商品推荐模型"></a>3.11 商品推荐模型</h2><h2 id="3-12-数据产品"><a href="#3-12-数据产品" class="headerlink" title="3.12 数据产品"></a>3.12 数据产品</h2><h2 id="3-13-决策支持"><a href="#3-13-决策支持" class="headerlink" title="3.13 决策支持"></a>3.13 决策支持</h2>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>多谢您的支持</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/user/zhifu.jpg" alt="Stone Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/文摘/" rel="tag"># 文摘</a>
+          
+            <a href="/tags/数据挖掘/" rel="tag"># 数据挖掘</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/16/他走了/" rel="next" title="他走了">
+                <i class="fa fa-chevron-left"></i> 他走了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          <!-- 
+
+ -->
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/user/chongshi3.jpg"
+               alt="Stone" />
+          <p class="site-author-name" itemprop="name">Stone</p>
+           
+              <p class="site-description motion-element" itemprop="description">给有限的未来一点想象</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://yuxwind.github.io/" target="_blank" title="余新">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  余新
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://imququ.com" target="_blank" title="Jerry Qu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Jerry Qu
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://shiyanjun.cn/" target="_blank" title="简单之美">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  简单之美
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/pinard/category/894692.html" target="_blank" title="刘建平Pinard">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  刘建平Pinard
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://xiaorui.cc/" target="_blank" title="xiaorui">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  xiaorui
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-数据挖掘概述"><span class="nav-number">1.</span> <span class="nav-text">2 数据挖掘概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-数据分析和数据挖掘"><span class="nav-number">1.1.</span> <span class="nav-text">2.2 数据分析和数据挖掘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-数据挖掘成熟技术"><span class="nav-number">1.2.</span> <span class="nav-text">2.3 数据挖掘成熟技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-决策树"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.3.1 决策树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-神经网络"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.3.2 神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-回归"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3.3 回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-4-关联规则"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.3.4 关联规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-5-聚类"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.3.5 聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-6-贝叶斯分类方法"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.3.6 贝叶斯分类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-7-支持向量机"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.3.7 支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-8-主成成分分析"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.3.8 主成成分分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-9-假设检验"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.3.9 假设检验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-数据化运营中常见的数据分析项目类型"><span class="nav-number">2.</span> <span class="nav-text">3 数据化运营中常见的数据分析项目类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-目标客户的特征分析"><span class="nav-number">2.1.</span> <span class="nav-text">3.1 目标客户的特征分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-目标客户的预测（响应，分类）模型"><span class="nav-number">2.2.</span> <span class="nav-text">3.2 目标客户的预测（响应，分类）模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-运营群体的活跃度定义"><span class="nav-number">2.3.</span> <span class="nav-text">3.3. 运营群体的活跃度定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-用户路径分析"><span class="nav-number">2.4.</span> <span class="nav-text">3.4 用户路径分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-交叉销售模型"><span class="nav-number">2.5.</span> <span class="nav-text">3.5 交叉销售模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-信息质量模型"><span class="nav-number">2.6.</span> <span class="nav-text">3.6 信息质量模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-服务保障模型"><span class="nav-number">2.7.</span> <span class="nav-text">3.7 服务保障模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-用户（买家，卖家）分层模型"><span class="nav-number">2.8.</span> <span class="nav-text">3.8 用户（买家，卖家）分层模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-9-卖家（买家）交易模型"><span class="nav-number">2.9.</span> <span class="nav-text">3.9 卖家（买家）交易模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-10-信用风险模型"><span class="nav-number">2.10.</span> <span class="nav-text">3.10 信用风险模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-11-商品推荐模型"><span class="nav-number">2.11.</span> <span class="nav-text">3.11 商品推荐模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-12-数据产品"><span class="nav-number">2.12.</span> <span class="nav-text">3.12 数据产品</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-13-决策支持"><span class="nav-number">2.13.</span> <span class="nav-text">3.13 决策支持</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Stone</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'sillystone-info';
+      var disqus_identifier = '2017/10/21/数据挖掘与数据化运营实战：思路-方法-技巧和应用/';
+
+      var disqus_title = "数据挖掘与数据化运营实战：思路 方法 技巧和应用";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="local-search-pop-overlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+
+</body>
+</html>
