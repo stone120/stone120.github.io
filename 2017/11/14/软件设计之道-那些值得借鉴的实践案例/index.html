@@ -61,19 +61,16 @@
 
 
 
-<meta name="description" content="代码评审代码评审关注点需求理解偏差架构一致性，除正确性以外的其他属性设计思路的盲点，场景缺失接口核对可测试性简洁性后期难以检测的问题
-自动化测试的关注点人对计算机运算结果的预期错误逻辑复杂度高的功能容易受影响，需要频繁回归的功能">
+<meta name="description" content="书摘">
 <meta property="og:type" content="article">
 <meta property="og:title" content="软件设计之道-那些值得借鉴的实践案例">
 <meta property="og:url" content="http://www.sillystone.info/2017/11/14/软件设计之道-那些值得借鉴的实践案例/index.html">
 <meta property="og:site_name" content="三只鱼">
-<meta property="og:description" content="代码评审代码评审关注点需求理解偏差架构一致性，除正确性以外的其他属性设计思路的盲点，场景缺失接口核对可测试性简洁性后期难以检测的问题
-自动化测试的关注点人对计算机运算结果的预期错误逻辑复杂度高的功能容易受影响，需要频繁回归的功能">
-<meta property="og:updated_time" content="2017-11-28T03:02:13.529Z">
+<meta property="og:description" content="书摘">
+<meta property="og:updated_time" content="2017-12-03T12:14:07.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件设计之道-那些值得借鉴的实践案例">
-<meta name="twitter:description" content="代码评审代码评审关注点需求理解偏差架构一致性，除正确性以外的其他属性设计思路的盲点，场景缺失接口核对可测试性简洁性后期难以检测的问题
-自动化测试的关注点人对计算机运算结果的预期错误逻辑复杂度高的功能容易受影响，需要频繁回归的功能">
+<meta name="twitter:description" content="书摘">
 
 
 
@@ -382,8 +379,41 @@
       
 
       
-        <h1 id="代码评审"><a href="#代码评审" class="headerlink" title="代码评审"></a>代码评审</h1><h2 id="代码评审关注点"><a href="#代码评审关注点" class="headerlink" title="代码评审关注点"></a>代码评审关注点</h2><p>需求理解偏差<br>架构一致性，除正确性以外的其他属性<br>设计思路的盲点，场景缺失<br>接口核对<br>可测试性<br>简洁性<br>后期难以检测的问题</p>
-<h2 id="自动化测试的关注点"><a href="#自动化测试的关注点" class="headerlink" title="自动化测试的关注点"></a>自动化测试的关注点</h2><p>人对计算机运算结果的预期错误<br>逻辑复杂度高的功能<br>容易受影响，需要频繁回归的功能</p>
+        <p>书摘<br><a id="more"></a></p>
+<h1 id="工程实践"><a href="#工程实践" class="headerlink" title="工程实践"></a>工程实践</h1><h2 id="第3章-代码评审"><a href="#第3章-代码评审" class="headerlink" title="第3章 代码评审"></a>第3章 代码评审</h2><h3 id="代码评审关注点"><a href="#代码评审关注点" class="headerlink" title="代码评审关注点"></a>代码评审关注点</h3><p>需求理解偏差<br>架构一致性，除正确性以外的其他属性<br>设计思路的盲点，场景缺失<br>接口核对<br>可测试性<br>简洁性<br>后期难以检测的问题</p>
+<h3 id="自动化测试的关注点"><a href="#自动化测试的关注点" class="headerlink" title="自动化测试的关注点"></a>自动化测试的关注点</h3><p>人对计算机运算结果的预期错误<br>逻辑复杂度高的功能<br>容易受影响，需要频繁回归的功能</p>
+<h3 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h3><p>创新模式-5， 结构模式-7 行为模式-11</p>
+<blockquote>
+<p>熟练掌握类图，类与类之间的关系<br>掌握每种模式的构成件以及构成件之间的相互关系<br>识别每种模式中稳定部分和变化部分，每种模式应用的场景和局限<br>亲手应用模式，编写代码</p>
+</blockquote>
+<h3 id="DDD领域驱动开发"><a href="#DDD领域驱动开发" class="headerlink" title="DDD领域驱动开发"></a>DDD领域驱动开发</h3><h2 id="第6-百度外卖物流智能调度"><a href="#第6-百度外卖物流智能调度" class="headerlink" title="第6 百度外卖物流智能调度"></a>第6 百度外卖物流智能调度</h2><p>数据建模<br>对于多目标动态优化问题，采取逐层建模的方式降低复杂度。<br>降维：通用的参数变量，需要在底层作为基础约束条件经行采集<br>特化：多变的场景变量，在高层作为调优参数进行优化</p>
+<p>场景优化：商圈 城市 时段 天气 。价格 –&gt;          场景调参  – 最优配送骑士及路径<br>动态规划：空间开销函数，时间开销，惩罚函数     –&gt; 函数建模  – 多项函数分值<br>约束条件：商户 用户 骑士，订单（起止时间 地点）  –&gt; 数据采集 – 试试场景下的约束变量</p>
+<h2 id="第7-当当用户画像"><a href="#第7-当当用户画像" class="headerlink" title="第7 当当用户画像"></a>第7 当当用户画像</h2><h1 id="互联网高可用架构变迁"><a href="#互联网高可用架构变迁" class="headerlink" title="互联网高可用架构变迁"></a>互联网高可用架构变迁</h1><h2 id="第14-架构演化和业务增长的领悟"><a href="#第14-架构演化和业务增长的领悟" class="headerlink" title="第14 架构演化和业务增长的领悟"></a>第14 架构演化和业务增长的领悟</h2><p>分治，解耦</p>
+<blockquote>
+<p>引入队列<br>通过反转注入IOC<br>采用事件驱动，观察者模式，消息链模式<br>扩容<br>数据写瓶颈：<br>内存聚合，一定量后统一写入<br>采用 nosql技术<br>水平分/垂直分</p>
+</blockquote>
+<p>计算瓶颈:<br>复杂数学模型，feature增加，运算力需求增加；<br>内存换时间，分布式计算，分级服务</p>
+<p>存储瓶颈： nosql es</p>
+<h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3><blockquote>
+<p>组件化<br>业务组织团队<br>服务就是产品<br>去中心化<br>基础设施自动化<br>容错设计<br>计划设计<br>服务质量保证</p>
+</blockquote>
+<h2 id="第15-Mico的朴素架构之旅"><a href="#第15-Mico的朴素架构之旅" class="headerlink" title="第15 Mico的朴素架构之旅"></a>第15 Mico的朴素架构之旅</h2><p>mysql作为主要的持久化存储， 大部分业务落在mysql，采用主从拓扑，按业务分库；（从用来读）<br>Mogodb 文件系统使用GridFS； 使用GraphicsMagick js binding 处理图片压缩 缩略图</p>
+<p>异步<br>拆分服务</p>
+<p>对话场景：<br>发消息： 服务端写cache，同时更新消息协议中的redis，再写队列。 （落地，派发后台处理）<br>使用队列 实现 已送达，已阅读</p>
+<p>socket server长连接 的水平扩展，会话双方不在同一实例， socket server通信也使用队列</p>
+<h3 id="ELK-监控-RPC（Thrift）"><a href="#ELK-监控-RPC（Thrift）" class="headerlink" title="ELK 监控 RPC（Thrift）"></a>ELK 监控 RPC（Thrift）</h3><h3 id="云端"><a href="#云端" class="headerlink" title="云端"></a>云端</h3><h2 id="第16-Hulu全平台视频系统演进"><a href="#第16-Hulu全平台视频系统演进" class="headerlink" title="第16 Hulu全平台视频系统演进"></a>第16 Hulu全平台视频系统演进</h2><h2 id="第17-基于-perReq-提升微博图片访问质量"><a href="#第17-基于-perReq-提升微博图片访问质量" class="headerlink" title="第17 基于 perReq 提升微博图片访问质量"></a>第17 基于 perReq 提升微博图片访问质量</h2><h1 id="云计算和大数据"><a href="#云计算和大数据" class="headerlink" title="云计算和大数据"></a>云计算和大数据</h1><h2 id="第18-云计算的核心业务系统建设（南天，戴敏）"><a href="#第18-云计算的核心业务系统建设（南天，戴敏）" class="headerlink" title="第18 云计算的核心业务系统建设（南天，戴敏）"></a>第18 云计算的核心业务系统建设（南天，戴敏）</h2><p>复杂系统建设实践</p>
+<ol>
+<li>分离关注点<br>安全 并发 故障处理 伸缩 服务类型服务代理  服务管理 性能<br>实施角度: 概念设计 架构设计  总体设计</li>
+</ol>
+<p>复杂系统引入云计算 soa 大数据很困难，不能 为了引入而引入<br>实践中，不能束缚于新技术 架构<br>分离主题<br>关注各个主题 自底向上分析 设计， 从主题推演架构设计<br>针对关键主题， 自底向上 采纳新技术， 调整策略<br>实施过程中 架构调整</p>
+<ol>
+<li>实施管理<br>关键： 整体规划能力  分解能力</li>
+</ol>
+<h2 id="第19-数据迁移-AWS"><a href="#第19-数据迁移-AWS" class="headerlink" title="第19  数据迁移 AWS"></a>第19  数据迁移 AWS</h2><h2 id="第21-东软-SaCa-Aclome-云管理平台架构演进"><a href="#第21-东软-SaCa-Aclome-云管理平台架构演进" class="headerlink" title="第21 东软 SaCa Aclome 云管理平台架构演进"></a>第21 东软 SaCa Aclome 云管理平台架构演进</h2><p>产品交付角度： 无法按需交付，持续交付<br>产品生产： 难以做到 “规模化” 跨团队 跨组织合作<br>产品质量： 难以应对潜在性能问题<br>产品发展： 难以“可持续”产品改良</p>
+<p>持续化交付： 产品按功能分割为多组件，根据需求提供必要的组件，组件装配技术快速交付；<br>高可用： 自动管理监控，容器话 热部署 保证高可用</p>
+<p>基于Dubbo分布式服务框架，提供高性能 透明化rpc远程调用 以及服务治理</p>
+<p>微内核，缓存，菜单，日志，组织结构，权限，采集，分析 </p>
+<h2 id="第22-计算广告大数据核心技术-（卢亿雷）"><a href="#第22-计算广告大数据核心技术-（卢亿雷）" class="headerlink" title="第22 计算广告大数据核心技术 （卢亿雷）"></a>第22 计算广告大数据核心技术 （卢亿雷）</h2><p>高可靠： 多分存储，不丢失  – HDFS<br>高可用： 7*24   –LVS 负载<br>高扩展：扩容服务 – Hadoop<br>高性能：高并发 低延迟  – Nginx Redis<br>高安全： IDC管理制度，分布式密钥管理  – Kerberos SSL 公私钥 分布式密钥 程序沙箱隔离<br>高性价： – Hadoop 分布式计算和存储<br>监控维护： 简单  – Nagios Ganglia</p>
 
       
     </div>
@@ -527,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">66</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -545,7 +575,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -627,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码评审"><span class="nav-number">1.</span> <span class="nav-text">代码评审</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#代码评审关注点"><span class="nav-number">1.1.</span> <span class="nav-text">代码评审关注点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动化测试的关注点"><span class="nav-number">1.2.</span> <span class="nav-text">自动化测试的关注点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工程实践"><span class="nav-number">1.</span> <span class="nav-text">工程实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第3章-代码评审"><span class="nav-number">1.1.</span> <span class="nav-text">第3章 代码评审</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码评审关注点"><span class="nav-number">1.1.1.</span> <span class="nav-text">代码评审关注点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自动化测试的关注点"><span class="nav-number">1.1.2.</span> <span class="nav-text">自动化测试的关注点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">1.1.3.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DDD领域驱动开发"><span class="nav-number">1.1.4.</span> <span class="nav-text">DDD领域驱动开发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第6-百度外卖物流智能调度"><span class="nav-number">1.2.</span> <span class="nav-text">第6 百度外卖物流智能调度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第7-当当用户画像"><span class="nav-number">1.3.</span> <span class="nav-text">第7 当当用户画像</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互联网高可用架构变迁"><span class="nav-number">2.</span> <span class="nav-text">互联网高可用架构变迁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第14-架构演化和业务增长的领悟"><span class="nav-number">2.1.</span> <span class="nav-text">第14 架构演化和业务增长的领悟</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务"><span class="nav-number">2.1.1.</span> <span class="nav-text">微服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第15-Mico的朴素架构之旅"><span class="nav-number">2.2.</span> <span class="nav-text">第15 Mico的朴素架构之旅</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ELK-监控-RPC（Thrift）"><span class="nav-number">2.2.1.</span> <span class="nav-text">ELK 监控 RPC（Thrift）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#云端"><span class="nav-number">2.2.2.</span> <span class="nav-text">云端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第16-Hulu全平台视频系统演进"><span class="nav-number">2.3.</span> <span class="nav-text">第16 Hulu全平台视频系统演进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第17-基于-perReq-提升微博图片访问质量"><span class="nav-number">2.4.</span> <span class="nav-text">第17 基于 perReq 提升微博图片访问质量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#云计算和大数据"><span class="nav-number">3.</span> <span class="nav-text">云计算和大数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第18-云计算的核心业务系统建设（南天，戴敏）"><span class="nav-number">3.1.</span> <span class="nav-text">第18 云计算的核心业务系统建设（南天，戴敏）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第19-数据迁移-AWS"><span class="nav-number">3.2.</span> <span class="nav-text">第19  数据迁移 AWS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第21-东软-SaCa-Aclome-云管理平台架构演进"><span class="nav-number">3.3.</span> <span class="nav-text">第21 东软 SaCa Aclome 云管理平台架构演进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第22-计算广告大数据核心技术-（卢亿雷）"><span class="nav-number">3.4.</span> <span class="nav-text">第22 计算广告大数据核心技术 （卢亿雷）</span></a></li></ol></li></ol></div>
             
 
           </div>
