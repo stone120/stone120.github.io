@@ -61,22 +61,16 @@
 
 
 
-<meta name="description" content="top K问题
-在大规模数据处理中，经常会遇到的一类问题：在海量数据中找出出现频率最好的前k个数，或者从海量数据中找出最大的前k个数，这类问题通常被称为top K问题。例如，在搜索引擎中，统计搜索最热门的10个查询词；在歌曲库中统计下载最高的前10首歌等。
-针对top K类问题，通常比较好的方案是分治+Trie树/hash+小顶堆（就是上面提到的最小堆），即先将数据集按照Hash方法分解成多个小数">
+<meta name="description" content="top K问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Question:top K">
 <meta property="og:url" content="http://www.sillystone.info/2017/12/22/Question-top-K/index.html">
 <meta property="og:site_name" content="三只鱼">
-<meta property="og:description" content="top K问题
-在大规模数据处理中，经常会遇到的一类问题：在海量数据中找出出现频率最好的前k个数，或者从海量数据中找出最大的前k个数，这类问题通常被称为top K问题。例如，在搜索引擎中，统计搜索最热门的10个查询词；在歌曲库中统计下载最高的前10首歌等。
-针对top K类问题，通常比较好的方案是分治+Trie树/hash+小顶堆（就是上面提到的最小堆），即先将数据集按照Hash方法分解成多个小数">
-<meta property="og:updated_time" content="2017-12-22T08:52:36.157Z">
+<meta property="og:description" content="top K问题">
+<meta property="og:updated_time" content="2017-12-26T15:13:09.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Question:top K">
-<meta name="twitter:description" content="top K问题
-在大规模数据处理中，经常会遇到的一类问题：在海量数据中找出出现频率最好的前k个数，或者从海量数据中找出最大的前k个数，这类问题通常被称为top K问题。例如，在搜索引擎中，统计搜索最热门的10个查询词；在歌曲库中统计下载最高的前10首歌等。
-针对top K类问题，通常比较好的方案是分治+Trie树/hash+小顶堆（就是上面提到的最小堆），即先将数据集按照Hash方法分解成多个小数">
+<meta name="twitter:description" content="top K问题">
 
 
 
@@ -386,6 +380,7 @@
 
       
         <p>top K问题</p>
+<a id="more"></a>
 <p>在大规模数据处理中，经常会遇到的一类问题：在海量数据中找出出现频率最好的前k个数，或者从海量数据中找出最大的前k个数，这类问题通常被称为top K问题。例如，在搜索引擎中，统计搜索最热门的10个查询词；在歌曲库中统计下载最高的前10首歌等。</p>
 <p>针对top K类问题，通常比较好的方案是分治+Trie树/hash+小顶堆（就是上面提到的最小堆），即先将数据集按照Hash方法分解成多个小数据集，然后使用Trie树或者Hash统计每个小数据集中的query词频，之后用小顶堆求出每个数据集中出现频率最高的前K个数，最后在所有top K中求出最终的top K。</p>
 <p>eg：有1亿个浮点数，如何找出其中最大的10000个？</p>
